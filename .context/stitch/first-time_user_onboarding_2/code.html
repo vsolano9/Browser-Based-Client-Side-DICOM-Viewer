@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediView Onboarding</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.spotlight-overlay {
+            background: radial-gradient(circle at var(--x) var(--y), transparent var(--r), rgba(0, 0, 0, 0.85) calc(var(--r) + 2px));
+        }@keyframes beacon-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(19, 127, 236, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(19, 127, 236, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(19, 127, 236, 0); }
+        }
+        .beacon {
+            animation: beacon-pulse 2s infinite;
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden h-screen w-screen relative">
+<div class="flex flex-col h-full w-full">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] bg-[#111418] px-6 py-3 shrink-0 z-30 relative">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined !text-3xl">medical_services</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">MediView Client</h2>
+</div>
+<div class="flex flex-1 justify-center gap-2 relative z-30" id="toolbar-area">
+<div class="flex gap-1 bg-[#1c2127] rounded-lg p-1 border border-[#283039]">
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Window/Level">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Zoom">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Pan">
+<span class="material-symbols-outlined">pan_tool</span>
+</button>
+<div class="w-px bg-[#283039] mx-1"></div>
+<div class="relative">
+<button class="p-2 text-white hover:text-white bg-[#283039] rounded transition-colors border border-primary/50" title="Measurements">
+<span class="material-symbols-outlined text-primary">straighten</span>
+</button>
+</div>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Annotations">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="3D Reconstruction Toggle">
+<span class="material-symbols-outlined">view_in_ar</span>
+</button>
+<div class="w-px bg-[#283039] mx-1"></div>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Play Cine">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-end gap-6">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 bg-[#1c2127] hover:bg-[#283039] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-4 transition-colors border border-[#283039]" id="upload-btn">
+<span class="material-symbols-outlined !text-[20px]">upload_file</span>
+<span class="hidden sm:inline">Upload DICOM</span>
+</button>
+<div class="flex items-center gap-3">
+<button class="text-white/70 hover:text-white flex items-center gap-1.5 px-2 py-1 rounded hover:bg-[#283039] transition-colors group relative">
+<span class="material-symbols-outlined">help</span>
+<span class="text-xs font-medium">Guide</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-[#283039]" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIOTQAJCZOy4bGi-6EF-Ha8y10lUA5eZmKJvvFlfr1TjMJXjpkIwczD6BvKccci_8sr7yJdCuPZriRQaksmiuODFG47SAdDLINuWPtdal_Ivs9tv_wAxWJ1tq4dWXG4SIhQiPgAcLlGGoszHr_CjxCzCRe6k0RurqaX-5gUeoMRx_RhNQsqlDOLqAHDBaYlEYVxprmthCTTE3jh8i8nGOfILZd3-R489xnAlDOrEaFtOXXKBcCIsA4z-ejRIvZFWt7y63mW-BlGhVN");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden bg-[#0d1116]">
+<aside class="w-64 bg-[#111418] border-r border-[#283039] flex flex-col shrink-0 z-0" id="sidebar-panel">
+<div class="p-4 border-b border-[#283039]">
+<h1 class="text-white text-base font-medium leading-normal">Patient Studies</h1>
+<p class="text-[#9dabb9] text-xs font-normal leading-normal mt-1">ID: 884920-XJ</p>
+</div>
+<div class="flex-1 overflow-y-auto p-2 flex flex-col gap-2">
+<div class="p-2 rounded bg-[#283039] border border-primary/30 cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs text-primary font-bold">Series 1</span>
+<span class="text-[10px] text-white/50">24 imgs</span>
+</div>
+<p class="text-white text-sm font-medium">Chest CT Contrast</p>
+<div class="w-full h-16 bg-[#000] mt-2 rounded flex items-center justify-center overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" data-alt="CT scan thumbnail placeholder"></div>
+<span class="material-symbols-outlined text-white/20 relative z-10">image</span>
+</div>
+</div>
+<div class="p-2 rounded hover:bg-[#1c2127] cursor-pointer border border-transparent transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs text-[#9dabb9]">Series 2</span>
+<span class="text-[10px] text-white/50">12 imgs</span>
+</div>
+<p class="text-white text-sm font-medium">Lung Window</p>
+<div class="w-full h-16 bg-[#000] mt-2 rounded flex items-center justify-center overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" data-alt="CT scan thumbnail placeholder"></div>
+<span class="material-symbols-outlined text-white/20 relative z-10">image</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 relative bg-[#000] grid grid-cols-2 gap-0.5 p-0.5">
+<div class="relative bg-[#111] group">
+<div class="absolute top-2 left-2 text-primary text-xs z-10 font-mono">
+<p>R: 1205</p>
+<p>C: 450</p>
+</div>
+<div class="absolute top-1/4 left-1/4 w-32 h-0.5 bg-yellow-400 rotate-45 z-20 pointer-events-none opacity-80 shadow-sm"></div>
+<div class="absolute top-[23%] left-[45%] text-yellow-400 text-xs font-bold bg-black/50 px-1 rounded z-20">24.5 mm</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 grayscale" data-alt="Medical X-ray generic background"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+</div>
+<div class="absolute bottom-2 right-2 text-white/50 text-xs font-mono">Zoom: 1.2x</div>
+</div>
+<div class="relative bg-[#111] group">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 grayscale" data-alt="Medical MRI generic background"></div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<p class="text-white/30 text-sm">Drag series here</p>
+</div>
+</div>
+</main>
+</div>
+</div>
+<div class="absolute inset-0 z-20 spotlight-overlay pointer-events-none transition-all duration-500 ease-in-out" style="--x: 50%; --y: 35px; --r: 220px;">
+</div>
+<div class="hidden absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+</div>
+<div class="absolute top-[75px] left-1/2 -translate-x-1/2 z-50 w-[420px] animate-fade-in-up" id="advanced-tools-guide">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#1f2937] border-t border-l border-[#374151] transform rotate-45 z-0"></div>
+<div class="relative z-10 bg-[#1f2937] text-white p-0 rounded-xl border border-[#374151] shadow-2xl flex flex-col overflow-hidden">
+<div class="bg-[#111418] p-4 border-b border-[#374151] flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center border border-blue-500/20 text-primary">
+<span class="material-symbols-outlined">design_services</span>
+</div>
+<div>
+<h3 class="font-bold text-sm text-white">Advanced Imaging Tools</h3>
+<p class="text-xs text-gray-400 mt-0.5">Step 2 of 4: Toolbar Mastery</p>
+</div>
+</div>
+<button class="text-gray-500 hover:text-white transition-colors" title="Dismiss Guide">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<p class="text-sm text-gray-300 leading-relaxed">
+                    Access powerful client-side tools directly from your browser. Try dragging the 
+                    <strong class="text-white font-medium">Measurement Tool</strong> to calculate tumor size instantly.
+                </p>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-2 bg-[#283039]/50 rounded border border-primary/40">
+<span class="material-symbols-outlined text-primary text-sm">straighten</span>
+<div class="flex-1">
+<span class="text-xs font-bold text-white block">Linear Measurement</span>
+<span class="text-[10px] text-gray-400">Click &amp; drag to measure</span>
+</div>
+<span class="text-[10px] bg-primary text-white px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Try Me</span>
+</div>
+<div class="flex items-center gap-3 p-2 hover:bg-[#283039]/30 rounded border border-transparent transition-colors opacity-60">
+<span class="material-symbols-outlined text-gray-400 text-sm">edit</span>
+<div class="flex-1">
+<span class="text-xs font-medium text-gray-300 block">Smart Annotations</span>
+<span class="text-[10px] text-gray-500">Add notes to ROI</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 hover:bg-[#283039]/30 rounded border border-transparent transition-colors opacity-60">
+<span class="material-symbols-outlined text-gray-400 text-sm">view_in_ar</span>
+<div class="flex-1">
+<span class="text-xs font-medium text-gray-300 block">3D Reconstruction</span>
+<span class="text-[10px] text-gray-500">Toggle volume rendering</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-[#161b22] p-3 flex justify-between items-center border-t border-[#374151]">
+<button class="text-xs text-gray-400 hover:text-white px-2 py-1 transition-colors">Skip Tour</button>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-md text-xs font-medium text-white border border-[#374151] hover:bg-[#283039] transition-colors">
+                        Previous
+                    </button>
+<button class="px-3 py-1.5 rounded-md text-xs font-medium bg-primary text-white hover:bg-blue-600 shadow-[0_0_10px_rgba(19,127,236,0.3)] transition-all">
+                        Next: Exporting
+                    </button>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

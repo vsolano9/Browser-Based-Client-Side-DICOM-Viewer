@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Terms of Service - DICOM Viewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        .dark ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 5px;
+            border: 2px solid #101922;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #3e4a56; 
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#3b82f6","background-light": "#f6f7f8",
+              "background-dark": "#0f1218","surface-light": "#ffffff",
+              "surface-dark": "#181d26","border-dark": "#2d3542",
+              "text-main-light": "#111418",
+              "text-main-dark": "#f1f5f9","text-secondary-light": "#637588",
+              "text-secondary-dark": "#94a3b8",},
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+                "DEFAULT": "0.25rem", 
+                "lg": "0.5rem", 
+                "xl": "0.75rem", 
+                "full": "9999px"
+            },
+            boxShadow: {
+                "glow": "0 0 20px rgba(59, 130, 246, 0.15)"}
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-display antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-primary/30 selection:text-primary-100">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-border-dark bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm px-6 py-3 lg:px-10 transition-colors duration-300">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">DICOM Viewer</h2>
+</div>
+<div class="flex items-center justify-end gap-4 lg:gap-8">
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold leading-normal transition-all duration-200 border border-transparent hover:border-primary/20">
+<span class="truncate">Back to Viewer</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-slate-200 dark:border-border-dark shadow-sm" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAFqAUqXx2oFzVr1gwcRcq3_l_SvnmG-sI8-kb4Uma-u3T9nn4VrAI24vtqlwdFh6GfpCPwhc_eWBrOEcCSO1usGF6kCFYg_XkvX-L24B052Bbgv-WGWW16CfvRdzWwww45wG8EZrqFkGT_oQ4bFEjqCVv3XZG4Y8y2QQIkzSR1KQs5tPgXOEpIWGky2zkOnhuZEL4EXI4gBzHs5G6GXBLi4rj5EuM7aIxoUGMj2JBUcTmYENlt6DU54XKrAtkGreMBTWe8C7bOoz4");'></div>
+</div>
+</div>
+</header>
+<div class="flex-1 flex justify-center py-8 px-4 lg:px-8">
+<div class="w-full max-w-[1200px] flex flex-col lg:flex-row gap-8">
+<aside class="w-full lg:w-64 shrink-0 lg:block">
+<div class="sticky top-24 flex flex-col gap-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-base font-semibold leading-normal text-text-main-light dark:text-text-main-dark">Contents</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal">Jump to section</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium text-sm transition-all duration-200 border-l-4 border-primary shadow-sm" href="#introduction">
+<span>1. Introduction</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#medical-disclaimer">
+<span>2. Medical Disclaimer</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#data-privacy">
+<span>3. Data Privacy</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#user-responsibilities">
+<span>4. User Responsibilities</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#intellectual-property">
+<span>5. Intellectual Property</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#liability">
+<span>6. Liability</span>
+</a>
+<a class="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-text-secondary-light dark:text-text-secondary-dark hover:bg-slate-100 dark:hover:bg-border-dark/50 hover:text-primary dark:hover:text-primary transition-all duration-200 text-sm font-medium border-l-4 border-transparent hover:border-slate-300 dark:hover:border-border-dark" href="#governing-law">
+<span>7. Governing Law</span>
+</a>
+</nav>
+<div class="hidden lg:flex flex-col gap-3 mt-4 pt-6 border-t border-slate-200 dark:border-border-dark">
+<button class="flex items-center justify-center gap-2 w-full h-10 px-4 bg-slate-200 dark:bg-border-dark/50 hover:bg-slate-300 dark:hover:bg-border-dark text-text-main-light dark:text-text-main-dark text-sm font-medium rounded-lg transition-colors border border-transparent dark:border-border-dark">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Print Terms</span>
+</button>
+<button class="flex items-center justify-center gap-2 w-full h-10 px-4 bg-slate-200 dark:bg-border-dark/50 hover:bg-slate-300 dark:hover:bg-border-dark text-text-main-light dark:text-text-main-dark text-sm font-medium rounded-lg transition-colors border border-transparent dark:border-border-dark">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PDF</span>
+</button>
+</div>
+</div>
+</aside>
+<main class="flex-1 min-w-0">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 lg:p-10 shadow-sm dark:shadow-glow border border-slate-200 dark:border-border-dark transition-colors duration-300">
+<div class="flex flex-col gap-2 mb-10 pb-6 border-b border-slate-200 dark:border-border-dark">
+<div class="flex flex-wrap items-start justify-between gap-4">
+<div>
+<h1 class="text-3xl lg:text-4xl font-black leading-tight tracking-[-0.033em] mb-2 text-text-main-light dark:text-text-main-dark">Terms of Service</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base">Effective Date: October 24, 2023</p>
+</div>
+<div class="bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-blue-100 dark:border-blue-900/50">
+                            Version 2.4
+                        </div>
+</div>
+</div>
+<div class="space-y-12">
+<section class="scroll-mt-32" id="introduction">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">info</span>
+                            1. Introduction
+                        </h2>
+<div class="max-w-none text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4">
+                                Welcome to the Browser-Based Client-Side DICOM Viewer ("Service"). By accessing or using our application, you agree to be bound by these Terms of Service. This agreement constitutes a legally binding contract between you ("User") and the service provider ("Company", "We", "Us").
+                            </p>
+<p>
+                                Please read these terms carefully before using the software for any medical imaging purposes. If you do not agree to these terms, you must discontinue use of the Service immediately.
+                            </p>
+</div>
+</section>
+<section class="scroll-mt-32" id="medical-disclaimer">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">medical_services</span>
+                            2. Medical Disclaimer
+                        </h2>
+<div class="p-4 bg-orange-50 dark:bg-orange-500/10 border-l-4 border-orange-500 rounded-r-lg mb-6 shadow-sm dark:shadow-none">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400 mt-0.5">warning</span>
+<div>
+<p class="font-bold text-orange-800 dark:text-orange-200 mb-1">Not for Diagnostic Use</p>
+<p class="text-sm text-orange-700 dark:text-orange-300">
+                                        Unless explicitly certified by local regulatory bodies (e.g., FDA 510(k), CE Mark), this viewer is intended for educational, research, and reference purposes only.
+                                    </p>
+</div>
+</div>
+</div>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4">
+                                The content and tools provided by this Service are not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+                            </p>
+<p>
+                                You acknowledge that this software may visualize data in ways that could be misleading if not interpreted by a trained professional. Reliance on any information provided by this Service is solely at your own risk.
+                            </p>
+</div>
+</section>
+<section class="scroll-mt-32" id="data-privacy">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">security</span>
+                            3. Data Privacy &amp; Local Processing
+                        </h2>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4">
+                                Our DICOM Viewer operates on a <strong>Client-Side Only</strong> architecture. This means:
+                            </p>
+<ul class="list-disc pl-6 mb-4 space-y-2 marker:text-primary">
+<li><strong>No Uploads:</strong> Your medical images (DICOM files) are processed exclusively within your web browser's memory. They are never uploaded to our servers or any third-party cloud storage.</li>
+<li><strong>PHI Protection:</strong> Protected Health Information (PHI) contained within the DICOM metadata remains on your local device. We do not collect, store, or transmit patient data.</li>
+<li><strong>Cookies &amp; Analytics:</strong> We may use anonymous cookies solely for performance monitoring and usage statistics, which do not contain any PHI or personal identifiers.</li>
+</ul>
+<p>
+                                While we design our system to be secure, you are responsible for the security of the device and browser you use to access the Service.
+                            </p>
+</div>
+</section>
+<section class="scroll-mt-32" id="user-responsibilities">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">person</span>
+                            4. User Responsibilities
+                        </h2>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4">
+                                By using this Service, you agree to:
+                            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-border-dark hover:border-primary/30 transition-colors duration-300">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">gavel</span>
+                                        Compliance
+                                    </h3>
+<p class="text-sm">Comply with all applicable laws regarding data privacy (e.g., HIPAA, GDPR) when viewing patient data.</p>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-border-dark hover:border-primary/30 transition-colors duration-300">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">devices</span>
+                                        Device Security
+                                    </h3>
+<p class="text-sm">Ensure your device is free from malware and that you are using a secure, up-to-date web browser.</p>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-border-dark hover:border-primary/30 transition-colors duration-300">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">code_off</span>
+                                        Prohibited Use
+                                    </h3>
+<p class="text-sm">Do not attempt to reverse engineer, decompile, or exploit the software code or Viewer functionality.</p>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-background-dark rounded-lg border border-slate-100 dark:border-border-dark hover:border-primary/30 transition-colors duration-300">
+<h3 class="font-bold text-text-main-light dark:text-text-main-dark mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">bug_report</span>
+                                        Reporting
+                                    </h3>
+<p class="text-sm">Promptly report any bugs or potential security vulnerabilities discovered during use.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="scroll-mt-32" id="intellectual-property">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">copyright</span>
+                            5. Intellectual Property
+                        </h2>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4">
+                                The Service, including its original content, features, and functionality (excluding user-loaded DICOM data), are and will remain the exclusive property of the Company and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.
+                            </p>
+</div>
+</section>
+<section class="scroll-mt-32" id="liability">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">gavel</span>
+                            6. Limitation of Liability
+                        </h2>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p class="mb-4 uppercase text-xs font-bold tracking-widest text-text-secondary-light/70 dark:text-text-secondary-dark/70">Please read carefully</p>
+<p class="mb-4 p-4 rounded bg-slate-100 dark:bg-background-dark border border-slate-200 dark:border-border-dark text-xs sm:text-sm">
+                                IN NO EVENT SHALL THE COMPANY, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES, BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (I) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (II) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE; (III) ANY CONTENT OBTAINED FROM THE SERVICE; AND (IV) UNAUTHORIZED ACCESS, USE OR ALTERATION OF YOUR TRANSMISSIONS OR CONTENT, WHETHER BASED ON WARRANTY, CONTRACT, TORT (INCLUDING NEGLIGENCE) OR ANY OTHER LEGAL THEORY, WHETHER OR NOT WE HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGE.
+                            </p>
+</div>
+</section>
+<section class="scroll-mt-32" id="governing-law">
+<h2 class="text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] pb-4 flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined">balance</span>
+                            7. Governing Law
+                        </h2>
+<div class="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
+<p>
+                                These Terms shall be governed and construed in accordance with the laws of California, United States, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+                            </p>
+</div>
+</section>
+</div>
+<div class="mt-16 pt-8 border-t border-slate-200 dark:border-border-dark">
+<form class="flex flex-col items-start gap-4" onsubmit="event.preventDefault();">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-primary focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-surface-dark cursor-pointer transition-colors" type="checkbox"/>
+<span class="text-text-main-light dark:text-text-main-dark text-sm md:text-base group-hover:text-primary transition-colors">I have read, understood, and agree to the Terms of Service.</span>
+</label>
+<div class="flex flex-wrap gap-4 mt-2">
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 dark:hover:bg-blue-500 text-white text-base font-bold leading-normal transition-all duration-200 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transform hover:-translate-y-0.5">
+                                Accept Terms
+                            </button>
+<button class="flex min-w-[140px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-slate-200 dark:bg-border-dark hover:bg-slate-300 dark:hover:bg-[#3e4a56] text-text-main-light dark:text-text-main-dark text-base font-bold leading-normal transition-colors">
+                                Decline
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</main>
+</div>
+</div>
+<footer class="py-8 px-10 text-center border-t border-slate-200 dark:border-border-dark mt-8 bg-background-light dark:bg-background-dark transition-colors duration-300">
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm">
+        © 2023 DICOM Viewer Inc. All rights reserved. <br class="sm:hidden"/>
+<a class="hover:text-primary underline transition-colors" href="#">Privacy Policy</a> • <a class="hover:text-primary underline transition-colors" href="#">Support</a>
+</p>
+</footer>
+
+</body></html>

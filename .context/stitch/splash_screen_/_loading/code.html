@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroView DICOM - Loading</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a2632",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-300">
+<div class="relative flex h-screen w-full flex-col overflow-hidden justify-center items-center">
+<!-- Background decorative elements (subtle) -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20 dark:opacity-10">
+<div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary blur-[160px]"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600 blur-[140px]"></div>
+</div>
+<div class="layout-container flex h-full w-full flex-col z-10 relative">
+<div class="flex flex-1 justify-center items-center py-5 px-4 sm:px-10">
+<div class="layout-content-container flex flex-col max-w-[480px] w-full flex-1 justify-center items-center gap-8">
+<!-- Branding Section -->
+<div class="flex flex-col items-center gap-4">
+<!-- Logo Container -->
+<div class="relative flex items-center justify-center w-24 h-24 rounded-2xl bg-primary/10 dark:bg-surface-dark border border-primary/20 shadow-lg shadow-primary/5">
+<span class="material-symbols-outlined text-primary text-5xl">
+                                radiology
+                            </span>
+<!-- Scanning effect overlay (simulated with CSS for static design) -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-full w-full rounded-2xl opacity-50"></div>
+</div>
+<!-- App Name -->
+<h1 class="text-slate-900 dark:text-white tracking-tight text-[32px] font-bold leading-tight text-center">
+                            NeuroView DICOM
+                        </h1>
+</div>
+<!-- Loading Section -->
+<div class="w-full max-w-[320px] flex flex-col gap-3">
+<!-- Progress Bar -->
+<div class="h-1.5 w-full rounded-full bg-slate-200 dark:bg-surface-dark overflow-hidden">
+<div class="h-full rounded-full bg-primary w-[65%] shadow-[0_0_10px_rgba(19,127,236,0.5)]"></div>
+</div>
+<!-- Status Text -->
+<div class="flex justify-between items-center px-1">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium animate-pulse">
+                                Initializing client-side engine...
+                            </p>
+<p class="text-slate-400 dark:text-slate-600 text-xs font-normal">
+                                65%
+                            </p>
+</div>
+</div>
+<!-- Security Badge / Info -->
+<div class="mt-8 flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 dark:bg-surface-dark border border-slate-200 dark:border-slate-700/50">
+<span class="material-symbols-outlined text-green-500 text-sm">
+                            verified_user
+                        </span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">
+                            Secure Local Processing
+                        </p>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="w-full py-6 flex justify-center items-center">
+<p class="text-slate-400 dark:text-[#9dabb9] text-xs font-normal leading-normal text-center opacity-60">
+                    NeuroView Systems Inc. © 2024 | v1.0.2
+                </p>
+</div>
+</div>
+</div>
+</body></html>

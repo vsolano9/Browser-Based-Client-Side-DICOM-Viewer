@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DICOM Viewer - Changelog</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1A2633",
+                        "surface-light": "#FFFFFF",
+                        "border-dark": "#283039",
+                        "border-light": "#E5E7EB",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #283039;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-x-hidden transition-colors duration-200">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark px-6 py-3 lg:px-10">
+<div class="flex items-center gap-4 text-inherit">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">local_hospital</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">DICOM Viewer</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Patient List</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Viewer</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-full size-10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[#9dabb9]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-primary/20" data-alt="User profile avatar showing a doctor in scrubs" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-d2BKsijtljrHVI8hifrwe4uRJLhelI0sFjQ1Fb9w1L4nyjKUa5XBbrThbKwoDuGXjVbkJU3jQ-eSZ_C8mGovGo6R-9WfkTKGBin4xE6F2jXe8HMrmX0TXXNpdY3XydZaTHTTy11YgFwXY5qa5HLMgHPThIIi8rGkEU7jbnVxfKD0HCuJhYIE8l_zuH01CD47cNqhxdlbE6pkRsAJQwpiGTemS07ya03dSqXxdWNXxmwp3dBnOiIBKGHsx3xAmm4xo8GDHTwrpPIg");'>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 layout-container max-w-7xl mx-auto w-full pt-6">
+<!-- Side Navigation (Versions) -->
+<aside class="hidden lg:flex flex-col w-64 pr-8 sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto custom-scrollbar">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<h1 class="text-base font-bold leading-normal mb-1">Release History</h1>
+<p class="text-[#9dabb9] text-sm font-normal leading-normal">Browse past updates</p>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Active Version -->
+<a class="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg bg-primary/10 border border-primary/20 group hover:border-primary/50 transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">label</span>
+<p class="text-primary text-sm font-bold leading-normal">v2.5.0</p>
+</div>
+<span class="text-xs font-medium text-primary bg-primary/20 px-2 py-0.5 rounded-full">Latest</span>
+</a>
+<!-- Past Versions -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark dark:hover:bg-white/5 transition-colors text-[#9dabb9] hover:text-white group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white transition-colors">history</span>
+<p class="text-sm font-medium leading-normal">v2.4.1</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark dark:hover:bg-white/5 transition-colors text-[#9dabb9] hover:text-white group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white transition-colors">history</span>
+<p class="text-sm font-medium leading-normal">v2.4.0</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark dark:hover:bg-white/5 transition-colors text-[#9dabb9] hover:text-white group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white transition-colors">history</span>
+<p class="text-sm font-medium leading-normal">v2.3.5</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark dark:hover:bg-white/5 transition-colors text-[#9dabb9] hover:text-white group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white transition-colors">history</span>
+<p class="text-sm font-medium leading-normal">v2.3.0</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-surface-dark dark:hover:bg-white/5 transition-colors text-[#9dabb9] hover:text-white group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white transition-colors">history</span>
+<p class="text-sm font-medium leading-normal">v2.2.0</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col gap-8 px-4 md:px-6 lg:px-0 pb-20">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border-light dark:border-border-dark pb-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">Changelog</span>
+<span class="text-[#9dabb9] text-xs px-2 py-1">•</span>
+<span class="text-[#9dabb9] text-xs font-medium">Last updated: Oct 24, 2023</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-tight">What's New in DICOM Viewer</h1>
+<p class="text-[#9dabb9] text-base md:text-lg font-normal leading-relaxed">
+                            Stay up to date with the latest features, improvements, and bug fixes. We're constantly improving your diagnostic workflow.
+                        </p>
+</div>
+<button class="group flex items-center gap-2 bg-primary hover:bg-blue-600 text-white px-5 py-3 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20 shrink-0">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+<span>Subscribe to Updates</span>
+</button>
+</div>
+<!-- Filters & Search Toolbar -->
+<div class="flex flex-col lg:flex-row gap-4 lg:items-center justify-between sticky top-[73px] z-40 bg-background-light dark:bg-background-dark py-4 -mx-4 px-4 lg:mx-0 lg:px-0">
+<!-- Search -->
+<div class="relative w-full lg:max-w-md group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9dabb9] group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg leading-5 bg-white dark:bg-surface-dark text-[#111418] dark:text-white placeholder-[#9dabb9] focus:outline-none focus:ring-2 focus:ring-primary sm:text-sm shadow-sm" placeholder="Search changelog (e.g., 'measurement', 'MPR')..." type="text"/>
+</div>
+<!-- Chips -->
+<div class="flex gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
+<button class="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium shadow-sm transition-transform hover:scale-105 active:scale-95">
+                            All Updates
+                        </button>
+<button class="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-surface-dark hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent hover:border-border-light dark:hover:border-border-dark text-[#9dabb9] hover:text-primary text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                            New Features
+                        </button>
+<button class="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-surface-dark hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent hover:border-border-light dark:hover:border-border-dark text-[#9dabb9] hover:text-primary text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+                            Improvements
+                        </button>
+<button class="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-surface-dark hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent hover:border-border-light dark:hover:border-border-dark text-[#9dabb9] hover:text-primary text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px]">bug_report</span>
+                            Bug Fixes
+                        </button>
+</div>
+</div>
+<!-- Feed -->
+<div class="flex flex-col gap-10">
+<!-- Release Card: Latest -->
+<article class="flex flex-col bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 border-b border-border-light dark:border-border-dark bg-gray-50 dark:bg-white/5">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div>
+<h2 class="text-xl font-bold text-[#111418] dark:text-white flex items-center gap-3">
+                                        v2.5.0
+                                        <span class="bg-primary text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full tracking-wide">Latest Release</span>
+</h2>
+<p class="text-[#9dabb9] text-sm mt-0.5">Released on October 24, 2023</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-sm font-medium text-[#111418] dark:text-white bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                    Full Release Notes
+                                </button>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-8">
+<!-- Section: New -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#9dabb9] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">auto_awesome</span> New Features
+                                </h3>
+<ul class="flex flex-col gap-4 pl-1">
+<li class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-green-500 shrink-0"></div>
+<div class="flex flex-col gap-1">
+<p class="font-medium text-base text-[#111418] dark:text-gray-100">Multi-Planar Reconstruction (MPR)</p>
+<p class="text-[#9dabb9] text-sm leading-relaxed max-w-3xl">
+                                                Introduced full MPR support allowing radiologists to reconstruct images in coronal, sagittal, and oblique planes from the original axial data. Includes real-time adjustment controls.
+                                            </p>
+<div class="mt-3 rounded-lg overflow-hidden border border-border-light dark:border-border-dark w-full max-w-lg aspect-video bg-cover bg-center" data-alt="Medical imaging software interface showing multi-planar reconstruction view of a brain scan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8xKR3Y-7IrFFRJqM8YogSwwbUdENyJGPX7mkc_noGufQubIhlQ6ryiwHjG7pRvo3qUXeKo6BfBMn3bNCp5ZVWxYV3RQ63u7JyP_GVU4nLcZdz2O-_uF3tC0hZLZbkhM_2rS9S91yMK-5DfSLfa1_ofToocbkUZNQuM2JNTMdKwvqiJPUMsYHt2ElF-tsBNLP6yDVJ1at3W9kceti0UsoMMXTdyFSZ8iidPUUEB6od4Xqi3L-CfdrJEkeYlFLE_aRFbm5i8wsBbcoW');">
+<div class="w-full h-full bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="text-white font-medium bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">View Screenshot</span>
+</div>
+</div>
+</div>
+</li>
+<li class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-green-500 shrink-0"></div>
+<div class="flex flex-col gap-1">
+<p class="font-medium text-base text-[#111418] dark:text-gray-100">Cobb Angle Measurement Tool</p>
+<p class="text-[#9dabb9] text-sm leading-relaxed">
+                                                Added a dedicated tool for orthopedic measurements to calculate spinal curvature directly within the viewer interface.
+                                            </p>
+</div>
+</li>
+</ul>
+</div>
+<div class="h-px w-full bg-border-light dark:bg-border-dark"></div>
+<!-- Section: Improvements -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#9dabb9] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">trending_up</span> Improvements
+                                </h3>
+<ul class="flex flex-col gap-3 pl-1">
+<li class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-blue-500 shrink-0"></div>
+<p class="text-[#111418] dark:text-gray-200 text-sm leading-relaxed">
+<span class="font-semibold text-white">Rendering Engine:</span> Rendering performance for large CT datasets (500+ slices) has been optimized, resulting in a 30% reduction in initial load time.
+                                        </p>
+</li>
+<li class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-blue-500 shrink-0"></div>
+<p class="text-[#111418] dark:text-gray-200 text-sm leading-relaxed">
+<span class="font-semibold text-white">UI Polish:</span> Updated the contrast of measurement annotations to be more visible on bright backgrounds (e.g., Lung window).
+                                        </p>
+</li>
+</ul>
+</div>
+<!-- Section: Fixes -->
+<div class="flex flex-col gap-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#9dabb9] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">bug_report</span> Bug Fixes
+                                </h3>
+<ul class="flex flex-col gap-3 pl-1">
+<li class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-red-400 shrink-0"></div>
+<p class="text-[#9dabb9] text-sm leading-relaxed">
+                                            Resolved an issue where window/level presets were not persisting after a page refresh for guest users.
+                                        </p>
+</li>
+</ul>
+</div>
+</div>
+</article>
+<!-- Release Card: Older -->
+<article class="flex flex-col bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-sm opacity-90 hover:opacity-100 transition-opacity">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 border-b border-border-light dark:border-border-dark bg-gray-50 dark:bg-white/5">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-lg bg-gray-200 dark:bg-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400">
+<span class="material-symbols-outlined text-xl">update</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-[#111418] dark:text-white flex items-center gap-3">
+                                        v2.4.1
+                                    </h2>
+<p class="text-[#9dabb9] text-sm mt-0.5">Released on September 10, 2023</p>
+</div>
+</div>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="flex flex-col gap-3 pl-1">
+<div class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-blue-500 shrink-0"></div>
+<p class="text-[#111418] dark:text-gray-200 text-sm leading-relaxed">
+<span class="font-bold text-blue-400 text-xs px-2 py-0.5 bg-blue-400/10 rounded mr-2">IMPROVEMENT</span>
+                                        Enhanced the DICOM tag browser search performance.
+                                    </p>
+</div>
+<div class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-red-400 shrink-0"></div>
+<p class="text-[#111418] dark:text-gray-200 text-sm leading-relaxed">
+<span class="font-bold text-red-400 text-xs px-2 py-0.5 bg-red-400/10 rounded mr-2">FIX</span>
+                                        Fixed a memory leak when closing multiple tabs in the study list.
+                                    </p>
+</div>
+<div class="flex gap-4 items-start">
+<div class="mt-1.5 size-2 rounded-full bg-red-400 shrink-0"></div>
+<p class="text-[#111418] dark:text-gray-200 text-sm leading-relaxed">
+<span class="font-bold text-red-400 text-xs px-2 py-0.5 bg-red-400/10 rounded mr-2">FIX</span>
+                                        Corrected the scroll sensitivity on high-DPI trackpads.
+                                    </p>
+</div>
+</div>
+</div>
+</article>
+<!-- Load More -->
+<div class="flex justify-center py-8">
+<button class="text-primary hover:text-white hover:bg-primary border border-primary/30 hover:border-primary px-6 py-2 rounded-full text-sm font-bold transition-all flex items-center gap-2">
+<span>Load Older Versions</span>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

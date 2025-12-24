@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MediView Onboarding</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for spotlight effect */
+        .spotlight-overlay {
+            background: radial-gradient(circle at var(--x) var(--y), transparent var(--r), rgba(0, 0, 0, 0.85) calc(var(--r) + 2px));
+        }
+        
+        /* Pulse animation for beacons */
+        @keyframes beacon-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(19, 127, 236, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(19, 127, 236, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(19, 127, 236, 0); }
+        }
+        
+        .beacon {
+            animation: beacon-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-hidden h-screen w-screen relative">
+<!-- Main App UI (Background Context) -->
+<div class="flex flex-col h-full w-full">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] bg-[#111418] px-6 py-3 shrink-0 z-10 relative">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined !text-3xl">medical_services</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">MediView Client</h2>
+</div>
+<!-- Toolbar Area (Target for Spotlight Step 2) -->
+<div class="flex flex-1 justify-center gap-2" id="toolbar-area">
+<div class="flex gap-1 bg-[#1c2127] rounded-lg p-1 border border-[#283039]">
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Window/Level">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Zoom">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Pan">
+<span class="material-symbols-outlined">pan_tool</span>
+</button>
+<div class="w-px bg-[#283039] mx-1"></div>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Measurements">
+<span class="material-symbols-outlined">straighten</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Annotations">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="p-2 text-white/70 hover:text-white hover:bg-[#283039] rounded transition-colors" title="Play Cine">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-end gap-6">
+<!-- Upload Button (Target for Spotlight Step 1) -->
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 bg-primary hover:bg-blue-600 text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-4 transition-colors" id="upload-btn">
+<span class="material-symbols-outlined !text-[20px]">upload_file</span>
+<span class="hidden sm:inline">Upload DICOM</span>
+</button>
+<div class="flex items-center gap-3">
+<button class="text-white/70 hover:text-white">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-[#283039]" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIOTQAJCZOy4bGi-6EF-Ha8y10lUA5eZmKJvvFlfr1TjMJXjpkIwczD6BvKccci_8sr7yJdCuPZriRQaksmiuODFG47SAdDLINuWPtdal_Ivs9tv_wAxWJ1tq4dWXG4SIhQiPgAcLlGGoszHr_CjxCzCRe6k0RurqaX-5gUeoMRx_RhNQsqlDOLqAHDBaYlEYVxprmthCTTE3jh8i8nGOfILZd3-R489xnAlDOrEaFtOXXKBcCIsA4z-ejRIvZFWt7y63mW-BlGhVN");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="flex flex-1 overflow-hidden bg-[#0d1116]">
+<!-- Sidebar (Target for Spotlight Step 3) -->
+<aside class="w-64 bg-[#111418] border-r border-[#283039] flex flex-col shrink-0 z-0" id="sidebar-panel">
+<div class="p-4 border-b border-[#283039]">
+<h1 class="text-white text-base font-medium leading-normal">Patient Studies</h1>
+<p class="text-[#9dabb9] text-xs font-normal leading-normal mt-1">ID: 884920-XJ</p>
+</div>
+<div class="flex-1 overflow-y-auto p-2 flex flex-col gap-2">
+<div class="p-2 rounded bg-[#283039] border border-primary/30 cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs text-primary font-bold">Series 1</span>
+<span class="text-[10px] text-white/50">24 imgs</span>
+</div>
+<p class="text-white text-sm font-medium">Chest CT Contrast</p>
+<div class="w-full h-16 bg-[#000] mt-2 rounded flex items-center justify-center overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" data-alt="CT scan thumbnail placeholder"></div>
+<span class="material-symbols-outlined text-white/20 relative z-10">image</span>
+</div>
+</div>
+<div class="p-2 rounded hover:bg-[#1c2127] cursor-pointer border border-transparent transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-xs text-[#9dabb9]">Series 2</span>
+<span class="text-[10px] text-white/50">12 imgs</span>
+</div>
+<p class="text-white text-sm font-medium">Lung Window</p>
+<div class="w-full h-16 bg-[#000] mt-2 rounded flex items-center justify-center overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" data-alt="CT scan thumbnail placeholder"></div>
+<span class="material-symbols-outlined text-white/20 relative z-10">image</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Viewer Grid -->
+<main class="flex-1 relative bg-[#000] grid grid-cols-2 gap-0.5 p-0.5">
+<!-- Image Viewport 1 -->
+<div class="relative bg-[#111] group">
+<div class="absolute top-2 left-2 text-primary text-xs z-10 font-mono">
+<p>R: 1205</p>
+<p>C: 450</p>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Placeholder for DICOM Image -->
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 grayscale" data-alt="Medical X-ray generic background"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+</div>
+<div class="absolute bottom-2 right-2 text-white/50 text-xs font-mono">Zoom: 1.2x</div>
+</div>
+<!-- Image Viewport 2 -->
+<div class="relative bg-[#111] group">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 grayscale" data-alt="Medical MRI generic background"></div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<p class="text-white/30 text-sm">Drag series here</p>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- ONBOARDING OVERLAY SYSTEM -->
+<!-- 
+        Step 1: Spotlight Overlay 
+        This div simulates the dark overlay with a 'cutout' (spotlight)
+        In a real app, CSS variables --x, --y, --r would be dynamic via JS.
+        Here we hardcode for the visual demo of "Step 1: Upload".
+    -->
+<div class="absolute inset-0 z-40 spotlight-overlay pointer-events-none transition-all duration-500 ease-in-out" style="--x: 90%; --y: 40px; --r: 60px;">
+</div>
+<!-- 
+        Step 0: Welcome Modal (Centered)
+        Visible initially, then hidden when tour starts.
+        Currently set to "display: none" to show the active tour state (Step 1) as requested in the prompt flow description 
+        BUT for the static output I will render the ACTIVE tour step over the UI. 
+        I will create a visual representation of the "Welcome Modal" centered, 
+        but I will comment it out or put it behind the active step to show the dynamic nature. 
+        
+        Actually, let's show the INITIAL WELCOME MODAL as the primary view for this design deliverable,
+        as it's the most critical part of "Onboarding".
+    -->
+<!-- Welcome Modal Container -->
+<div class="absolute inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+<div class="relative w-full max-w-lg bg-[#1c2127] rounded-xl border border-[#283039] shadow-2xl overflow-hidden flex flex-col animate-fade-in-up">
+<!-- Modal Header with Image -->
+<div class="relative h-40 bg-gradient-to-r from-blue-900 to-[#1c2127] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#137fec 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="z-10 bg-white/10 p-4 rounded-full border border-white/20 backdrop-blur-md shadow-lg">
+<span class="material-symbols-outlined text-white !text-5xl">shield_lock</span>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -bottom-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl"></div>
+</div>
+<!-- Modal Body -->
+<div class="p-8 flex flex-col gap-6">
+<div class="space-y-2 text-center">
+<h2 class="text-2xl font-bold text-white tracking-tight">Your Data Stays With You</h2>
+<p class="text-[#9dabb9] text-sm leading-relaxed max-w-sm mx-auto">
+                        Welcome to MediView. We prioritize your privacy. No images are ever uploaded to a server; all DICOM processing happens securely within your browser.
+                    </p>
+</div>
+<!-- Feature checklist -->
+<div class="space-y-3 bg-[#111418] p-4 rounded-lg border border-[#283039]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-400 text-sm">check_circle</span>
+<span class="text-white text-sm">100% Client-Side Rendering</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-400 text-sm">check_circle</span>
+<span class="text-white text-sm">Zero-Footprint (No Install)</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-400 text-sm">check_circle</span>
+<span class="text-white text-sm">HIPAA Compliant Architecture</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 pt-2">
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-11 bg-primary hover:bg-blue-600 text-white gap-2 text-sm font-bold shadow-[0_0_15px_rgba(19,127,236,0.4)] transition-all transform hover:scale-[1.02]">
+<span>Start Interactive Tour</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<button class="text-[#9dabb9] hover:text-white text-sm font-medium py-2 transition-colors">
+                        Skip and start viewing
+                    </button>
+</div>
+</div>
+<!-- Progress Dots (Step 0 of 5) -->
+<div class="flex justify-center gap-1.5 pb-6">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-[#283039]"></div>
+<div class="w-2 h-2 rounded-full bg-[#283039]"></div>
+<div class="w-2 h-2 rounded-full bg-[#283039]"></div>
+<div class="w-2 h-2 rounded-full bg-[#283039]"></div>
+</div>
+</div>
+</div>
+<!-- 
+        ACTIVE TOOLTIP DEMO
+        This represents what the UI looks like AFTER clicking "Start Tour".
+        I'm putting it here visually but hiding it with opacity-0 so you can see the structure.
+        Ideally, javascript would toggle the Welcome Modal off and this on.
+        
+        To demonstrate the design system fully, I will render a "Tooltip" floating near the Upload Button 
+        as if the user had just clicked "Start Tour".
+        
+        Since I can only render one static state effectively, I will position this tooltip 
+        but make it semitransparent or off to the side to imply the "Next Step". 
+        
+        BETTER YET: I'll use a CSS trick to hide the Modal and Show the Tooltip if the user hovers over the body?
+        No, that's too complex. 
+        
+        I will render the Tooltip element as `hidden` but fully styled in the code so the developer sees the component structure.
+    -->
+<!-- Tooltip Component (Example for Step 1: Upload) - Hidden by default for this view -->
+<div class="hidden absolute top-[70px] right-[20px] z-50 w-80 animate-fade-in" id="tour-tooltip">
+<!-- Connecting arrow -->
+<div class="absolute -top-2 right-10 w-4 h-4 bg-[#1f2937] border-t border-l border-[#374151] transform rotate-45 z-0"></div>
+<div class="relative z-10 bg-[#1f2937] text-white p-5 rounded-lg border border-[#374151] shadow-xl flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-xs font-bold">1</span>
+<h3 class="font-bold text-sm">Upload DICOM</h3>
+</div>
+<button class="text-gray-400 hover:text-white">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<p class="text-sm text-gray-300 leading-relaxed">
+                Drag and drop your DICOM folder or files anywhere on the screen, or click the button to browse.
+            </p>
+<div class="flex justify-between items-center mt-1">
+<span class="text-xs text-gray-500">Step 1 of 4</span>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+                        Back
+                    </button>
+<button class="px-3 py-1.5 rounded text-xs font-medium bg-primary text-white hover:bg-blue-600 transition-colors shadow-lg">
+                        Next
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pulsing Beacon Effect (Example on Upload Button) - Hidden by default -->
+<div class="hidden absolute top-[18px] right-[24px] w-[150px] h-[36px] rounded-lg beacon pointer-events-none z-50 border border-primary"></div>
+</body></html>

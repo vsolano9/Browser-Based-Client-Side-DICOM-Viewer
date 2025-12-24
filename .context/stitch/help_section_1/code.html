@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DICOM Viewer Help Center</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922", // Deep dark blue-grey
+                        "surface-dark": "#1c2127",   // Slightly lighter for cards
+                        "border-dark": "#283039",    // Borders
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for dark medical theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4754; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-hidden flex flex-col h-screen">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-[#111418] px-6 py-3 shrink-0 z-20">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined fill">local_hospital</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">DICOM Viewer</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#9dabb9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Viewer</a>
+<a class="text-[#9dabb9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Library</a>
+<a class="text-white text-sm font-medium leading-normal" href="#">Help Center</a>
+<a class="text-[#9dabb9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Settings</a>
+</nav>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-border-dark" data-alt="User profile avatar placeholder showing a generic gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCSVRXaTAUPREfkr6LqZxXZSQTbXc1Ci9RXaNuEn_rmt7w6Jg4dE99xw-mJ-tPaoAt6UY9ZgVysn3FEKRk1F0UAWvs1RGfnL7d0sxri5Zfcp5GaYdvbg6lvQ8drp94vvkKo_q8Np9ADdUEoq4ijyOZq3y7ZLicVDIzNfIYwqmOp7keVJNH_uHcoEPIqSkJbWw2H38h7xlL14Ywv-K2ppd0yRn-1SZ74ak4GpljEeb0cPhlw8OWl7FssdatWuQn4U3g1tQi8N4tVEb37");'></div>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-[#111418] border-r border-border-dark flex flex-col hidden md:flex shrink-0 overflow-y-auto">
+<div class="p-4 flex flex-col gap-6">
+<div class="flex flex-col gap-1 px-3">
+<h1 class="text-white text-base font-semibold">Help Center</h1>
+<p class="text-[#9dabb9] text-xs font-normal">v2.4.0 Documentation</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 border border-primary/20 group" href="#">
+<span class="material-symbols-outlined text-primary text-[20px] fill">school</span>
+<p class="text-white text-sm font-medium">Getting Started</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1c2127] group transition-colors" href="#">
+<span class="material-symbols-outlined text-[#9dabb9] group-hover:text-white text-[20px]">movie</span>
+<p class="text-[#9dabb9] group-hover:text-white text-sm font-medium">Video Tutorials</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1c2127] group transition-colors" href="#">
+<span class="material-symbols-outlined text-[#9dabb9] group-hover:text-white text-[20px]">keyboard</span>
+<p class="text-[#9dabb9] group-hover:text-white text-sm font-medium">Shortcuts</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1c2127] group transition-colors" href="#">
+<span class="material-symbols-outlined text-[#9dabb9] group-hover:text-white text-[20px]">quiz</span>
+<p class="text-[#9dabb9] group-hover:text-white text-sm font-medium">FAQ</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1c2127] group transition-colors" href="#">
+<span class="material-symbols-outlined text-[#9dabb9] group-hover:text-white text-[20px]">mail</span>
+<p class="text-[#9dabb9] group-hover:text-white text-sm font-medium">Contact Support</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-4 border-t border-border-dark">
+<div class="bg-gradient-to-br from-primary/20 to-transparent p-4 rounded-xl border border-primary/20">
+<h3 class="text-white text-sm font-bold mb-1">Need live help?</h3>
+<p class="text-[#9dabb9] text-xs mb-3">Our support team is online 24/7 for urgent cases.</p>
+<button class="w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 px-4 rounded-lg transition-colors">Start Chat</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-dark relative scroll-smooth">
+<div class="max-w-[1000px] mx-auto px-6 py-10 flex flex-col gap-12 pb-24">
+<!-- Hero Section & Search -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl md:text-5xl font-black tracking-tight">How can we help you?</h1>
+<p class="text-[#9dabb9] text-lg">Search for tools, error codes, or browse the guides below.</p>
+</div>
+<div class="relative w-full max-w-2xl">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9dabb9]">search</span>
+</div>
+<input class="w-full bg-[#1c2127] border border-border-dark text-white text-base rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent block w-full pl-12 p-4 placeholder:text-[#5a6b7c] shadow-lg" placeholder="e.g. 'How to measure ROI' or 'Keyboard shortcuts'" type="text"/>
+<div class="absolute inset-y-0 right-2 flex items-center">
+<kbd class="hidden sm:inline-block px-2 py-1 text-xs font-semibold text-[#9dabb9] bg-[#283039] border border-[#3b4754] rounded">⌘ K</kbd>
+</div>
+</div>
+</section>
+<!-- Quick Start Cards -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-white text-2xl font-bold">Quick Start</h2>
+<a class="text-primary text-sm font-medium hover:underline flex items-center gap-1" href="#">View all guides <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-border-dark bg-[#1c2127] p-5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all cursor-pointer">
+<div class="size-10 rounded-full bg-[#283039] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors text-[#9dabb9]">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<div>
+<h3 class="text-white text-base font-bold mb-1">Upload Data</h3>
+<p class="text-[#9dabb9] text-sm">Drag &amp; drop DICOM folders to view instantly.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-border-dark bg-[#1c2127] p-5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all cursor-pointer">
+<div class="size-10 rounded-full bg-[#283039] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors text-[#9dabb9]">
+<span class="material-symbols-outlined">tune</span>
+</div>
+<div>
+<h3 class="text-white text-base font-bold mb-1">Window/Level</h3>
+<p class="text-[#9dabb9] text-sm">Adjust contrast &amp; brightness for visibility.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-border-dark bg-[#1c2127] p-5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all cursor-pointer">
+<div class="size-10 rounded-full bg-[#283039] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors text-[#9dabb9]">
+<span class="material-symbols-outlined">square_foot</span>
+</div>
+<div>
+<h3 class="text-white text-base font-bold mb-1">Measurements</h3>
+<p class="text-[#9dabb9] text-sm">Tools for length, angle, and ROI area.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-border-dark bg-[#1c2127] p-5 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all cursor-pointer">
+<div class="size-10 rounded-full bg-[#283039] flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors text-[#9dabb9]">
+<span class="material-symbols-outlined">3d_rotation</span>
+</div>
+<div>
+<h3 class="text-white text-base font-bold mb-1">MPR View</h3>
+<p class="text-[#9dabb9] text-sm">Reconstruct 2D images into 3D planes.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Essential Shortcuts -->
+<section class="bg-[#1c2127] rounded-2xl border border-border-dark overflow-hidden">
+<div class="p-6 border-b border-border-dark flex justify-between items-center bg-[#181d23]">
+<div>
+<h2 class="text-white text-xl font-bold">Essential Shortcuts</h2>
+<p class="text-[#9dabb9] text-sm mt-1">Master the viewer with these key bindings.</p>
+</div>
+<span class="material-symbols-outlined text-[#3b4754] text-4xl">keyboard</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border-dark">
+<!-- Col 1 -->
+<div class="p-2">
+<table class="w-full text-left text-sm">
+<tbody class="divide-y divide-border-dark/50">
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Window / Level</td>
+<td class="py-3 px-4 text-right"><kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">W</kbd></td>
+</tr>
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Zoom In/Out</td>
+<td class="py-3 px-4 text-right"><kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">Z</kbd></td>
+</tr>
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Pan Tool</td>
+<td class="py-3 px-4 text-right"><kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">P</kbd></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Col 2 -->
+<div class="p-2">
+<table class="w-full text-left text-sm">
+<tbody class="divide-y divide-border-dark/50">
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Invert Colors</td>
+<td class="py-3 px-4 text-right"><kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">I</kbd></td>
+</tr>
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Next / Prev Slice</td>
+<td class="py-3 px-4 text-right">
+<kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">↑</kbd>
+<kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">↓</kbd>
+</td>
+</tr>
+<tr class="group hover:bg-[#283039] transition-colors">
+<td class="py-3 px-4 text-[#9dabb9] font-medium">Reset View</td>
+<td class="py-3 px-4 text-right"><kbd class="px-2 py-1 bg-[#283039] group-hover:bg-[#1c2127] border border-border-dark rounded text-white text-xs font-mono">Space</kbd></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Video Tutorials -->
+<section>
+<h2 class="text-white text-2xl font-bold mb-6">Popular Tutorials</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="rounded-xl overflow-hidden border border-border-dark bg-[#1c2127] flex flex-col">
+<div class="aspect-video w-full bg-[#283039] relative group cursor-pointer overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" data-alt="Screenshot of DICOM viewer interface showing multi-planar reconstruction view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkN8gE1Fvh0jstPjzLjhf41aXuTO4ykoVp-Jj1x1HLcfoICFWnLzPwIaYfgb6vEye_f0eu-xL1T79unk-fny_S2m_wBCr8RBAeSpjVhy55_CuG1pdjifTYLh1C9b3IaEnHcS6gQfz1mZp49nnx7yWL9zkNbslmXca42vctoi8zwjlsPjCnDBhUGm72PT9Qx1rwOIDLHMNfa_8-kt0biWsugBdHTuCAxrGmjTJSYKRTfVx9nYWES7VRbkj931mkOC7RH0_fdQbyDxND");'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="size-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white fill text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 bg-black/80 text-white text-xs font-medium rounded">02:45</div>
+</div>
+<div class="p-5 flex-1">
+<h3 class="text-white font-bold text-lg mb-2">Mastering 3D MPR</h3>
+<p class="text-[#9dabb9] text-sm leading-relaxed">Learn how to navigate multi-planar reconstruction views to better visualize anatomical structures.</p>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden border border-border-dark bg-[#1c2127] flex flex-col">
+<div class="aspect-video w-full bg-[#283039] relative group cursor-pointer overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 transition-opacity" data-alt="Screenshot of DICOM viewer showing ROI tool measuring a tumor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzZQjR6Jov1xopJPPUw1WF1exkNkBKzB9Oh2Suq7ICwW4oMZdfHjN8QNzfSP3G1sW1JKr9OLN6Ymtf2kzzNuWQNoAnQRWk4Of_Mdp8fpiqQoXHfBUxvH64QbpSaz4llSY-GSh0U0nsqLUw0r_8M2zieMdhaOUxIfFnmoWZyJd3BHBjOF2leu8UcLdaNPDoUkctDrhAoJWwLcGM1JGx4ETdhRrSTjNX9utd1iI6oSwqKxxlD7IWiJmPCy7RWBVVM-BXjNglWAvM4Kga");'></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="size-14 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white fill text-3xl">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 bg-black/80 text-white text-xs font-medium rounded">01:30</div>
+</div>
+<div class="p-5 flex-1">
+<h3 class="text-white font-bold text-lg mb-2">Annotation &amp; Export</h3>
+<p class="text-[#9dabb9] text-sm leading-relaxed">A quick guide on how to mark up images with arrows and text, and export them for reports.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section>
+<h2 class="text-white text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<details class="group bg-[#1c2127] rounded-xl border border-border-dark open:border-primary/30 open:ring-1 open:ring-primary/30 transition-all">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+<span>Is my patient data private?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-[#9dabb9]">expand_more</span>
+</span>
+</summary>
+<div class="text-[#9dabb9] text-sm mt-0 p-5 pt-0 leading-relaxed border-t border-transparent group-open:border-border-dark/50">
+<p><strong>Yes, absolutely.</strong> This viewer operates entirely client-side within your browser. The DICOM images you drag and drop are processed locally on your machine and are <strong>never</strong> uploaded to any server. Your patient data remains secure on your device.</p>
+</div>
+</details>
+<details class="group bg-[#1c2127] rounded-xl border border-border-dark open:border-primary/30 open:ring-1 open:ring-primary/30 transition-all">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+<span>What file formats are supported?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-[#9dabb9]">expand_more</span>
+</span>
+</summary>
+<div class="text-[#9dabb9] text-sm mt-0 p-5 pt-0 leading-relaxed border-t border-transparent group-open:border-border-dark/50">
+<p>We support standard DICOM (.dcm) files, as well as directories containing DICOM series. We also support common medical image formats like NIfTI (.nii, .nii.gz) for research purposes.</p>
+</div>
+</details>
+<details class="group bg-[#1c2127] rounded-xl border border-border-dark open:border-primary/30 open:ring-1 open:ring-primary/30 transition-all">
+<summary class="flex justify-between items-center font-medium cursor-pointer list-none p-5 text-white">
+<span>How do I save my measurements?</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-[#9dabb9]">expand_more</span>
+</span>
+</summary>
+<div class="text-[#9dabb9] text-sm mt-0 p-5 pt-0 leading-relaxed border-t border-transparent group-open:border-border-dark/50">
+<p>You can export the current state of the viewer, including all annotations and measurements, by clicking the "Export" button in the top toolbar. You can save as a JSON state file or burn annotations into a PNG image.</p>
+</div>
+</details>
+</div>
+</section>
+<!-- Contact Footer -->
+<section class="bg-primary rounded-2xl p-8 md:p-12 relative overflow-hidden">
+<!-- Abstract Background Pattern -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+<div class="flex flex-col gap-2 max-w-lg">
+<h2 class="text-white text-3xl font-bold">Still need assistance?</h2>
+<p class="text-white/80 text-base leading-relaxed">Our medical imaging specialists are ready to help you with complex workflows or technical issues.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<button class="bg-white text-primary hover:bg-white/90 font-bold py-3 px-6 rounded-lg shadow-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">chat</span>
+                                Live Chat
+                            </button>
+<button class="bg-black/20 text-white hover:bg-black/30 font-bold py-3 px-6 rounded-lg border border-white/20 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">mail</span>
+                                Email Support
+                            </button>
+</div>
+</div>
+</section>
+<footer class="text-center text-[#5a6b7c] text-sm pt-8">
+<p>© 2023 DICOM Viewer Inc. All rights reserved.</p>
+</footer>
+</div>
+</main>
+</div>
+<!-- Floating Action Button for Mobile -->
+<div class="fixed bottom-6 right-6 md:hidden">
+<button class="size-14 bg-primary text-white rounded-full shadow-xl flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">question_mark</span>
+</button>
+</div>
+</body></html>

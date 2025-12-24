@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privacy Policy - DICOM Viewer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", // Adjusted primary for better dark mode contrast
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#0f172a", // Darker slate
+                        "surface-dark": "#1e293b", // Slate 800
+                        "border-dark": "#334155", // Slate 700
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark overflow-x-hidden font-display text-slate-100 antialiased selection:bg-primary selection:text-white">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-border-dark bg-surface-dark/95 backdrop-blur px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">DICOM Privacy</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 hidden md:flex">
+<div class="flex items-center gap-9">
+<a class="text-slate-400 text-sm font-medium hover:text-white transition-colors" href="#">Home</a>
+<a class="text-slate-400 text-sm font-medium hover:text-white transition-colors" href="#">Viewer</a>
+<a class="text-white text-sm font-bold" href="#">Privacy Policy</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-lg shadow-blue-900/20">
+<span class="truncate">Launch Viewer</span>
+</button>
+</div>
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<div class="@container mb-12">
+<div class="flex flex-col gap-6 py-6 @[480px]:gap-8 @[864px]:flex-row-reverse items-center">
+<div class="w-full h-64 @[864px]:h-80 @[864px]:w-1/2 bg-center bg-no-repeat bg-cover rounded-xl shadow-2xl shadow-black/50 relative overflow-hidden ring-1 ring-white/10" data-alt="Abstract 3D illustration of a digital shield protecting glowing medical data points" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDj6xPkWtarmNzUMkoxxhAZ9O0VKECTe-PRnAqvossKsmT-LAptKImOPl4xydZQwJMmBZBthMemmDxiPEnD0jQoZ3kIQwEzAJLnsdG20gwpt3FEwlMKdxgEWEh_e4JDsN0w8l0uM-xPzwpvs3cPV-g3Go3cfbqmwmWn_zkwZuHttMgtAx-uTKk6o3jrF36gvW9Spp2cNe5Du2asE-KfArt7gSKxxjbqxZdI-mduH9if2P1Xohc7jIMYleRyjbSdMTqFKMV2F69zRrcB");'>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 via-transparent to-transparent"></div>
+</div>
+<div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:w-1/2 justify-center">
+<div class="flex flex-col gap-4 text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 w-fit backdrop-blur-sm">
+<span class="material-symbols-outlined text-emerald-400 text-[18px]">verified_user</span>
+<span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Client-Side Only</span>
+</div>
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl drop-shadow-sm">
+                                Your Patient Data <br/><span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">Stays on Your Device</span>
+</h1>
+<h2 class="text-slate-400 text-base font-normal leading-relaxed">
+                                We believe privacy is a fundamental right in healthcare. Our DICOM viewer uses advanced WebAssembly to process images locally within your browser's memory sandbox.
+                            </h2>
+</div>
+<div class="flex gap-4 flex-wrap">
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 transition-colors text-white text-base font-bold shadow-lg shadow-blue-900/40 hover:shadow-blue-900/60 ring-1 ring-white/10">
+<span class="truncate">Read the full policy</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-surface-dark hover:bg-slate-700 transition-colors text-slate-200 text-base font-bold border border-border-dark hover:border-slate-600 shadow-sm">
+<span class="truncate">Contact DPO</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="border-b border-border-dark mb-10">
+<p class="text-slate-500 text-sm font-medium pb-4 flex items-center">
+<span class="material-symbols-outlined align-middle text-[18px] mr-2 text-slate-400">schedule</span>
+                    Effective Date: <span class="text-slate-300 ml-1">October 24, 2023</span>
+</p>
+</div>
+<div class="flex flex-col gap-8 mb-16">
+<div class="flex flex-col gap-4">
+<h3 class="text-white text-2xl font-bold leading-tight flex items-center gap-3">
+<span class="w-1.5 h-8 bg-primary rounded-full block"></span>
+                        Zero-Upload Architecture
+                    </h3>
+<p class="text-slate-400 text-base max-w-[720px] ml-4">
+                        Unlike traditional cloud viewers, our architecture guarantees that sensitive Patient Health Information (PHI) never leaves your machine. We utilize transient memory allocation that is wiped instantly when you close the tab.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-1 gap-5 rounded-xl border border-border-dark bg-surface-dark p-6 flex-col shadow-lg hover:border-slate-600 transition-colors group">
+<div class="size-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform duration-300 ring-1 ring-blue-500/20">
+<span class="material-symbols-outlined text-[28px]">memory</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="text-slate-100 text-lg font-bold">Local Processing</h4>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                All rendering happens on your CPU/GPU using WebAssembly. No file transfer protocols are initiated.
+                            </p>
+</div>
+</div>
+<div class="flex flex-1 gap-5 rounded-xl border border-border-dark bg-surface-dark p-6 flex-col shadow-lg hover:border-slate-600 transition-colors group">
+<div class="size-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform duration-300 ring-1 ring-purple-500/20">
+<span class="material-symbols-outlined text-[28px]">cloud_off</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="text-slate-100 text-lg font-bold">No Cloud Storage</h4>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                We do not have a backend database for image storage. We cannot see, access, or share your data.
+                            </p>
+</div>
+</div>
+<div class="flex flex-1 gap-5 rounded-xl border border-border-dark bg-surface-dark p-6 flex-col shadow-lg hover:border-slate-600 transition-colors group">
+<div class="size-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover:scale-110 transition-transform duration-300 ring-1 ring-orange-500/20">
+<span class="material-symbols-outlined text-[28px]">delete_sweep</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="text-slate-100 text-lg font-bold">Ephemeral Session</h4>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                Data persists only in your browser's RAM. Once the tab is closed, the operating system reclaims the memory.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6 mb-16">
+<h3 class="text-white text-2xl font-bold leading-tight px-1 flex items-center gap-3">
+<span class="w-1.5 h-8 bg-primary rounded-full block"></span>
+                    Detailed Policy Terms
+                </h3>
+<div class="flex flex-col gap-4">
+<details class="flex flex-col rounded-lg border border-border-dark bg-surface-dark px-5 py-2 group shadow-md transition-all duration-200 open:ring-1 open:ring-primary/50 open:bg-surface-dark/80" open="">
+<summary class="flex cursor-pointer items-center justify-between gap-6 py-4 select-none">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-md bg-slate-800/50 group-open:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary">privacy_tip</span>
+</div>
+<p class="text-slate-200 text-base font-semibold group-open:text-white">Data Collection &amp; Anonymity</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-open:rotate-180 transition-transform group-open:text-primary">expand_more</span>
+</summary>
+<div class="pb-6 pl-[3.75rem] pr-2 border-t border-border-dark/50 pt-4 mt-1">
+<p class="text-slate-400 text-sm leading-relaxed">
+                                We strictly adhere to a "No-Log" policy regarding PHI. We do not collect names, IDs, birth dates, or any pixel data from the DICOM files you load.
+                                <br/><br/>
+                                We may collect minimal, anonymous technical telemetry (e.g., browser version, error rates, loading times) to ensure application stability. This data is completely decoupled from any patient information and cannot be used to re-identify any individual.
+                            </p>
+</div>
+</details>
+<details class="flex flex-col rounded-lg border border-border-dark bg-surface-dark px-5 py-2 group shadow-md transition-all duration-200 open:ring-1 open:ring-primary/50 open:bg-surface-dark/80">
+<summary class="flex cursor-pointer items-center justify-between gap-6 py-4 select-none">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-md bg-slate-800/50 group-open:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary">cookie</span>
+</div>
+<p class="text-slate-200 text-base font-semibold group-open:text-white">Cookie Usage &amp; Local Storage</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-open:rotate-180 transition-transform group-open:text-primary">expand_more</span>
+</summary>
+<div class="pb-6 pl-[3.75rem] pr-2 border-t border-border-dark/50 pt-4 mt-1">
+<p class="text-slate-400 text-sm leading-relaxed">
+                                We use <strong>Local Storage</strong> solely to remember your UI preferences (e.g., dark mode setting, window layout configurations, tool presets).
+                                <br/><br/>
+                                We do not use tracking cookies for advertising purposes. You can clear your preferences at any time by clearing your browser's site data.
+                            </p>
+</div>
+</details>
+<details class="flex flex-col rounded-lg border border-border-dark bg-surface-dark px-5 py-2 group shadow-md transition-all duration-200 open:ring-1 open:ring-primary/50 open:bg-surface-dark/80">
+<summary class="flex cursor-pointer items-center justify-between gap-6 py-4 select-none">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-md bg-slate-800/50 group-open:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary">gavel</span>
+</div>
+<p class="text-slate-200 text-base font-semibold group-open:text-white">HIPAA &amp; GDPR Compliance</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-open:rotate-180 transition-transform group-open:text-primary">expand_more</span>
+</summary>
+<div class="pb-6 pl-[3.75rem] pr-2 border-t border-border-dark/50 pt-4 mt-1">
+<p class="text-slate-400 text-sm leading-relaxed">
+<strong class="text-slate-200">HIPAA (US):</strong> Since our application does not transmit PHI to our servers, we do not act as a Business Associate under HIPAA definitions for data storage. However, our client-side encryption and processing standards are designed to support your compliance needs.
+                                <br/><br/>
+<strong class="text-slate-200">GDPR (EU):</strong> We act as a Data Processor for the transient session. As no data persists on our systems, "Right to be Forgotten" requests are automatically fulfilled the moment you close the application tab.
+                            </p>
+</div>
+</details>
+<details class="flex flex-col rounded-lg border border-border-dark bg-surface-dark px-5 py-2 group shadow-md transition-all duration-200 open:ring-1 open:ring-primary/50 open:bg-surface-dark/80">
+<summary class="flex cursor-pointer items-center justify-between gap-6 py-4 select-none">
+<div class="flex items-center gap-4">
+<div class="p-2 rounded-md bg-slate-800/50 group-open:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-400 group-open:text-primary">hub</span>
+</div>
+<p class="text-slate-200 text-base font-semibold group-open:text-white">Third-Party Subprocessors</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-open:rotate-180 transition-transform group-open:text-primary">expand_more</span>
+</summary>
+<div class="pb-6 pl-[3.75rem] pr-2 border-t border-border-dark/50 pt-4 mt-1">
+<p class="text-slate-400 text-sm leading-relaxed">
+                                We utilize minimal third-party services strictly for application delivery:
+                            </p>
+<ul class="list-disc ml-5 mt-3 space-y-2 text-slate-400 text-sm">
+<li><strong class="text-slate-300">CDN Provider:</strong> To deliver the application code (HTML/JS/WASM) to your browser.</li>
+<li><strong class="text-slate-300">Analytics (Optional):</strong> Aggregated, anonymous usage stats (e.g., Google Analytics 4 in IP-anonymization mode).</li>
+</ul>
+<br/>
+<p class="text-slate-400 text-sm">
+                                None of these providers have access to the medical images loaded into the viewer.
+                            </p>
+</div>
+</details>
+</div>
+</div>
+<div class="rounded-2xl bg-gradient-to-br from-surface-dark to-slate-900 border border-border-dark p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl ring-1 ring-white/5">
+<div class="flex flex-col gap-2">
+<h4 class="text-white text-lg font-bold">Your Rights &amp; Control</h4>
+<p class="text-slate-400 text-sm max-w-md">
+                        You have full control over your session. You can clear local preferences or contact our Data Protection Officer for any specific concerns.
+                    </p>
+</div>
+<div class="flex gap-3 flex-wrap">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-red-900/40 bg-red-950/20 text-red-400 text-sm font-semibold hover:bg-red-900/40 hover:border-red-800/50 transition-all focus:ring-2 focus:ring-red-500/20">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                        Clear Local Data
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border-dark bg-transparent text-slate-200 text-sm font-semibold hover:bg-slate-800 hover:border-slate-600 transition-all focus:ring-2 focus:ring-slate-500/20">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                        Contact Privacy Team
+                    </button>
+</div>
+</div>
+<footer class="mt-16 py-8 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<p>© 2023 DICOM Viewer Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+<a class="hover:text-primary transition-colors" href="#">Status</a>
+</div>
+</footer>
+</div>
+</div>
+</div>
+
+</body></html>

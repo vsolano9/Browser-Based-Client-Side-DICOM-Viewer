@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DICOM Viewer Pro - Light Mode</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563eb", // Blue 600 - darker for better contrast on light
+                        "primary-hover": "#1d4ed8", // Blue 700
+                        "primary-glow": "rgba(37, 99, 235, 0.4)", // Adjusted opacity
+                        "background": "#ffffff", // Pure white
+                        "surface": "#f8fafc", // Slate 50
+                        "surface-strong": "#f1f5f9", // Slate 100
+                        "surface-hover": "#e2e8f0", // Slate 200
+                        "border": "#cbd5e1", // Slate 300 - clearly visible border
+                        "text-main": "#0f172a", // Slate 900
+                        "text-muted": "#64748b", // Slate 500
+                        "text-inverse": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px var(--tw-shadow-color)',
+                        'glow-lg': '0 0 40px -10px var(--tw-shadow-color)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background text-text-main font-display overflow-x-hidden antialiased selection:bg-primary selection:text-white">
+<div class="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
+<div class="flex items-center justify-between whitespace-nowrap px-6 md:px-10 py-4 max-w-[1400px] mx-auto">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full drop-shadow-md" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-text-main text-xl font-bold tracking-tight">DICOM Viewer</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden md:flex items-center gap-8">
+<a class="text-text-muted hover:text-primary text-sm font-medium transition-colors" href="#">Viewer</a>
+<a class="text-text-muted hover:text-primary text-sm font-medium transition-colors" href="#">Library</a>
+<a class="text-text-muted hover:text-primary text-sm font-medium transition-colors" href="#">Help Center</a>
+</div>
+<button class="flex items-center justify-center rounded-lg h-9 px-5 bg-primary hover:bg-primary-hover text-white text-sm font-bold shadow-lg shadow-primary/30 transition-all duration-200">
+<span class="truncate">Upgrade to Pro</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center w-full">
+<div class="max-w-[1400px] w-full px-4 md:px-10">
+<div class="@container py-16 md:py-24">
+<div class="flex flex-col gap-12 lg:flex-row items-center">
+<div class="flex flex-col gap-8 flex-1 text-center lg:text-left z-10">
+<div class="flex flex-col gap-4">
+<div class="flex justify-center lg:justify-start">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                                    Professional Edition
+                                </span>
+</div>
+<h1 class="text-text-main text-5xl font-black leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
+                                Accelerate Your <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-primary">Diagnostics</span> with Pro
+                            </h1>
+<h2 class="text-text-muted text-lg md:text-xl font-normal leading-relaxed max-w-[640px] mx-auto lg:mx-0">
+                                Unlock bulk processing, high-fidelity export, and advanced anonymization tools—all running securely client-side in your browser.
+                            </h2>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<button class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary-hover text-white text-base font-bold transition-all shadow-glow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5">
+                                Start 14-Day Free Trial
+                            </button>
+<button class="flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-border hover:bg-surface-hover hover:border-gray-400 text-text-main text-base font-bold transition-all">
+                                View Documentation
+                            </button>
+</div>
+<p class="text-xs text-text-muted">No credit card required for trial. HIPAA Compliant.</p>
+</div>
+<div class="w-full lg:w-3/5 flex justify-center relative">
+<div class="absolute inset-0 bg-blue-100 blur-[100px] rounded-full opacity-60 pointer-events-none"></div>
+<div class="w-full bg-surface-strong bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-2xl shadow-slate-200/50 border border-border relative overflow-hidden group ring-1 ring-black/5" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCtMdOwc-6Inxg9iw8l_keNc7gy4_CELuZgrZt-g-dM2jy_iv33r83sL2d9ATDY-LrK16n8_aEEREfsIl6bZ-eP2vf0pmdemHAuRrLLRoYlPTxI84AmbKNpeAHAJ5p6j4YmOi46eo6Y0ghEanwPczG5oj4UHESFuiyHF7Q30MFt-h6KZgvKUXKQ7OEbZvjm2syimxIq0qbSlNjaaDGcS3amXJLaxwQmflPk0O0m8EQXpeeAR5TgPiaW3qUEw5JOk8PDZgOQGemn5T7n");'>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+<div class="absolute top-4 left-4 right-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<div class="bg-black/70 backdrop-blur px-3 py-1 rounded text-xs text-white font-mono">ID: 8492-AX</div>
+<div class="flex gap-2">
+<div class="size-3 rounded-full bg-red-500"></div>
+<div class="size-3 rounded-full bg-yellow-500"></div>
+<div class="size-3 rounded-full bg-green-500"></div>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 p-4 bg-white/95 backdrop-blur-md rounded-lg border border-border shadow-lg">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-green-600 mt-0.5">check_circle</span>
+<div>
+<span class="block text-sm font-bold text-text-main">Client-side Processing Active</span>
+<span class="block text-xs text-text-muted mt-1">DICOM data remains on your device. Zero cloud upload.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-12 py-20 border-t border-border/50 relative">
+<div class="text-center max-w-3xl mx-auto">
+<h2 class="text-text-main text-3xl font-bold mb-4">Professional Grade Tools</h2>
+<p class="text-text-muted text-lg">Designed for high-volume analysis and advanced research workflows where precision and speed are paramount.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 hover:border-primary/50 hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group">
+<div class="size-14 rounded-xl bg-blue-100 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-size: 28px;">layers</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-text-main text-xl font-bold group-hover:text-primary transition-colors">Bulk Processing</h3>
+<p class="text-text-muted text-sm leading-relaxed">Analyze entire patient cohorts instantly without singular uploads. Drag and drop complete study folders directly into the browser.</p>
+</div>
+</div>
+<div class="flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 hover:border-primary/50 hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group">
+<div class="size-14 rounded-xl bg-blue-100 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-size: 28px;">video_settings</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-text-main text-xl font-bold group-hover:text-primary transition-colors">Advanced Export</h3>
+<p class="text-text-muted text-sm leading-relaxed">Export cine loops to MP4, extract Raw pixel data for ML models, and generate high-res captures suitable for publication.</p>
+</div>
+</div>
+<div class="flex flex-col gap-5 rounded-2xl border border-border bg-surface p-8 hover:border-primary/50 hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group">
+<div class="size-14 rounded-xl bg-blue-100 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-size: 28px;">verified_user</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-text-main text-xl font-bold group-hover:text-primary transition-colors">Anonymization Suite</h3>
+<p class="text-text-muted text-sm leading-relaxed">Automatically scrub PII from DICOM tags and pixel data based on custom rulesets for safe research sharing and educational use.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="py-16" id="pricing">
+<div class="text-center mb-16">
+<h2 class="text-text-main text-3xl md:text-4xl font-bold">Choose Your Plan</h2>
+<p class="text-text-muted mt-3 text-lg">Transparent pricing for professionals and teams.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+<div class="flex flex-col rounded-2xl border border-border bg-surface p-8 relative hover:border-slate-400 transition-colors">
+<div class="mb-6">
+<h3 class="text-text-main text-lg font-bold mb-2">Basic Viewer</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-text-main text-4xl font-black">Free</span>
+<span class="text-text-muted text-sm font-medium">/forever</span>
+</div>
+<p class="text-text-muted text-sm mt-3">Essential tools for quick viewing and single studies.</p>
+</div>
+<div class="flex flex-col gap-4 mb-8 flex-1 border-t border-border/50 pt-6">
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                Standard Viewing
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                Single File Upload
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                Basic Windowing (W/L)
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                Local Storage Only
+                            </div>
+</div>
+<button class="w-full rounded-lg h-10 px-4 bg-white border border-border hover:bg-surface-hover text-text-main text-sm font-bold transition-colors">
+                            Current Plan
+                        </button>
+</div>
+<div class="flex flex-col rounded-2xl border-2 border-primary bg-white p-8 relative shadow-glow-lg shadow-primary/20 transform md:-translate-y-4 z-10">
+<div class="absolute -top-4 left-0 right-0 flex justify-center">
+<span class="bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-blue-500/40">Most Popular</span>
+</div>
+<div class="mb-6 mt-2">
+<h3 class="text-primary text-lg font-bold mb-2">Pro Workstation</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-text-main text-5xl font-black">$29</span>
+<span class="text-text-muted text-sm font-medium">/month</span>
+</div>
+<p class="text-text-muted text-sm mt-3">Power tools for serious diagnostics and research.</p>
+</div>
+<div class="flex flex-col gap-4 mb-8 flex-1 border-t border-border/50 pt-6">
+<div class="flex items-center gap-3 text-sm text-text-main font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Everything in Basic
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Bulk Processing
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                MP4 Video Export
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Advanced Anonymization
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Priority Support
+                            </div>
+</div>
+<button class="w-full rounded-lg h-12 px-4 bg-primary hover:bg-primary-hover text-white text-base font-bold transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
+                            Upgrade Now
+                        </button>
+</div>
+<div class="flex flex-col rounded-2xl border border-border bg-surface p-8 relative hover:border-slate-400 transition-colors">
+<div class="mb-6">
+<h3 class="text-text-main text-lg font-bold mb-2">Enterprise</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-text-main text-4xl font-black">Custom</span>
+</div>
+<p class="text-text-muted text-sm mt-3">Scalable solutions for hospitals and clinics.</p>
+</div>
+<div class="flex flex-col gap-4 mb-8 flex-1 border-t border-border/50 pt-6">
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                Multi-user License
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                PACS Integration
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                SSO / Active Directory
+                            </div>
+<div class="flex items-center gap-3 text-sm text-text-muted">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">check</span>
+                                SLA Guarantees
+                            </div>
+</div>
+<button class="w-full rounded-lg h-10 px-4 bg-transparent border border-border hover:bg-surface-hover text-text-main text-sm font-bold transition-colors">
+                            Contact Sales
+                        </button>
+</div>
+</div>
+</div>
+<div class="py-16 max-w-4xl mx-auto">
+<h3 class="text-text-main text-2xl font-bold mb-8 px-4 text-center">Detailed Comparison</h3>
+<div class="overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-border">
+<th class="p-5 text-text-muted font-semibold text-sm w-1/2">Features</th>
+<th class="p-5 text-text-main font-bold text-center w-1/4">Basic</th>
+<th class="p-5 text-primary font-bold text-center w-1/4 bg-primary/5">Pro Workstation</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border text-sm">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="p-4 text-text-main">Client-Side Rendering</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-400">check</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="p-4 text-text-main">Windowing &amp; Leveling</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-400">check</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="p-4 text-text-main">Measurement Tools (ROI, Length)</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-400">check</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="p-4 text-text-main">Multi-frame Playback</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-400">check</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check</span></td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+<td class="p-4 text-text-main font-medium">Batch Processing</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-300">remove</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check_circle</span></td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+<td class="p-4 text-text-main font-medium">Video Export (MP4)</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-300">remove</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check_circle</span></td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+<td class="p-4 text-text-main font-medium">Anonymization Export</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-300">remove</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check_circle</span></td>
+</tr>
+<tr class="bg-slate-50/50 hover:bg-slate-100 transition-colors">
+<td class="p-4 text-text-main font-medium">3D MPR Reconstruction</td>
+<td class="p-4 text-center"><span class="material-symbols-outlined text-gray-300">remove</span></td>
+<td class="p-4 text-center bg-primary/5"><span class="material-symbols-outlined text-primary">check_circle</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="py-12 mb-20">
+<div class="bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-2xl border border-border p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl shadow-slate-200/60 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex flex-col gap-3 max-w-xl text-center md:text-left relative z-10">
+<h2 class="text-text-main text-2xl font-bold">Need a custom solution for your clinic?</h2>
+<p class="text-text-muted text-lg">We offer on-premise deployment, white-labeling, and direct PACS integration for healthcare institutions.</p>
+</div>
+<button class="whitespace-nowrap rounded-lg h-12 px-8 bg-primary text-white hover:bg-primary-hover font-bold transition-colors shadow-lg shadow-primary/20 relative z-10">
+                        Contact Sales Team
+                    </button>
+</div>
+</div>
+</div>
+<footer class="w-full border-t border-border bg-surface pt-16 pb-8 text-sm">
+<div class="max-w-[1400px] mx-auto px-6 md:px-10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="md:col-span-1 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<span class="text-text-main font-bold text-lg">DICOM Viewer</span>
+</div>
+<div class="flex items-start gap-2 text-text-muted bg-white border border-border p-3 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-green-600 text-lg mt-0.5">lock</span>
+<p class="text-xs leading-relaxed">
+                                All processing is client-side for your privacy. Your medical data never leaves this browser.
+                            </p>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-text-main font-bold">Product</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Features</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#pricing">Pricing</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Changelog</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-text-main font-bold">Company</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Contact Us</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Blog</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-text-main font-bold">Legal</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+<li><a class="text-text-muted hover:text-primary transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-text-muted text-xs">© 2023 DICOM Viewer Pro. All rights reserved.</span>
+<div class="flex gap-3">
+<span class="text-[10px] text-text-muted font-medium px-2 py-1 border border-border rounded bg-white/50">HIPAA Compliant</span>
+<span class="text-[10px] text-text-muted font-medium px-2 py-1 border border-border rounded bg-white/50">GDPR Ready</span>
+<span class="text-[10px] text-text-muted font-medium px-2 py-1 border border-border rounded bg-white/50">SOC2 Type II</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

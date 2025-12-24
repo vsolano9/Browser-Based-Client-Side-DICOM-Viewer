@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pro User Dashboard - DICOM Viewer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#137fec",
+              "surface": "#ffffff",
+              "background": "#f8fafc",
+              "border-light": "#e2e8f0",
+              "text-main": "#0f172a", 
+              "text-muted": "#64748b",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem", 
+              "lg": "0.5rem", 
+              "xl": "0.75rem", 
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            filter: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-main overflow-hidden h-screen flex">
+<aside class="w-64 flex flex-col border-r border-border-light bg-surface shrink-0 transition-all duration-300">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3 mb-8">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="font-bold text-lg tracking-tight text-text-main">DICOM Viewer Pro</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-background border border-border-light mb-6">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shadow-sm" data-alt="Portrait of Dr. Smith" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDWUq6blwVJ5mP0Ephgz5VApDDJvIiiYYEqY2pGFQvZnqjVFR_ESr2v4k96CBqWAOhN4u4ixY7S0FjJTLWF9xte3tICdwG1QDFzFSyjaPRgx1ZLmDcL_7Fvo9XA8Vl3oUpAeIeZfgjxwi8Gniq4lPqz6bBWDsBncTRMIE18tE8g0whA-KMc69xSfrkHigikllRCmMwPIP1VgHM2ZNJGEyYf4tpWdbFBUnj-0ncgEHqDumlfMlyxCZew23LldK-A9UGQxF1UWEjMHjDW");'></div>
+<div class="flex flex-col min-w-0">
+<h1 class="text-text-main text-sm font-semibold leading-normal truncate">Dr. Smith</h1>
+<p class="text-text-muted text-xs font-normal leading-normal">Pro License</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 border border-primary/20 group" href="#">
+<span class="material-symbols-outlined text-primary transition-colors">dashboard</span>
+<p class="text-text-main text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors group text-text-muted hover:text-text-main" href="#">
+<span class="material-symbols-outlined group-hover:text-text-main transition-colors">schedule</span>
+<p class="text-sm font-medium leading-normal">Recent Studies</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors group text-text-muted hover:text-text-main" href="#">
+<span class="material-symbols-outlined group-hover:text-text-main transition-colors">star</span>
+<p class="text-sm font-medium leading-normal">Starred</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors group text-text-muted hover:text-text-main" href="#">
+<span class="material-symbols-outlined group-hover:text-text-main transition-colors">edit_note</span>
+<p class="text-sm font-medium leading-normal">Annotations</p>
+</a>
+<div class="my-2 border-t border-border-light"></div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors group text-text-muted hover:text-text-main" href="#">
+<span class="material-symbols-outlined group-hover:text-text-main transition-colors">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors group text-text-muted hover:text-text-main" href="#">
+<span class="material-symbols-outlined group-hover:text-text-main transition-colors">help</span>
+<p class="text-sm font-medium leading-normal">Support</p>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="rounded-lg bg-background border border-border-light p-3">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs text-text-muted font-medium">Browser Storage</span>
+<span class="text-xs text-text-main font-bold">22%</span>
+</div>
+<div class="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 22%"></div>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full relative overflow-hidden bg-background">
+<header class="h-16 flex items-center justify-between px-8 border-b border-border-light shrink-0 bg-surface/80 backdrop-blur-sm sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-text-muted text-sm">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+<span>Local Workspace</span>
+</div>
+<span class="text-gray-300">/</span>
+<span class="text-text-main text-sm font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
+<span class="material-symbols-outlined text-green-600 text-[16px] icon-filled">lock</span>
+<span class="text-xs font-medium text-green-700">Client-Side Only • Encrypted</span>
+</div>
+<div class="h-6 w-px bg-border-light"></div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-9 rounded-lg hover:bg-gray-100 text-text-muted hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg hover:bg-gray-100 text-text-muted hover:text-text-main transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-6xl mx-auto p-8 flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-bold tracking-tight text-text-main">Welcome back, Dr. Smith</h1>
+<p class="text-text-muted text-sm max-w-xl">
+                            Manage your locally stored DICOM studies securely. All data remains in your browser's IndexedDB and is never uploaded to any server.
+                        </p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-surface border border-border-light hover:bg-gray-50 text-text-main text-sm font-medium transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                            Export Data
+                        </button>
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+                            Import Study
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-light bg-surface shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start">
+<div class="p-2 rounded-lg bg-gray-100 text-text-main">
+<span class="material-symbols-outlined">hard_drive</span>
+</div>
+<span class="text-xs font-medium px-2 py-1 rounded bg-green-100 text-green-700">Healthy</span>
+</div>
+<div>
+<p class="text-text-muted text-sm font-medium">Local Storage Used</p>
+<p class="text-2xl font-bold text-text-main mt-1">450MB <span class="text-sm font-normal text-text-muted">/ 2GB</span></p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-light bg-surface shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start">
+<div class="p-2 rounded-lg bg-gray-100 text-text-main">
+<span class="material-symbols-outlined">folder_special</span>
+</div>
+<span class="text-xs font-medium px-2 py-1 rounded bg-primary/10 text-primary">+2 New</span>
+</div>
+<div>
+<p class="text-text-muted text-sm font-medium">Total Local Studies</p>
+<p class="text-2xl font-bold text-text-main mt-1">12</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-light bg-surface shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start">
+<div class="p-2 rounded-lg bg-gray-100 text-text-main">
+<span class="material-symbols-outlined">edit</span>
+</div>
+<span class="text-xs font-medium px-2 py-1 rounded bg-gray-100 text-text-muted">No pending</span>
+</div>
+<div>
+<p class="text-text-muted text-sm font-medium">Annotated Series</p>
+<p class="text-2xl font-bold text-text-main mt-1">8</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl border border-border-light bg-surface shadow-sm overflow-hidden">
+<div class="p-4 border-b border-border-light bg-gray-50/50 flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="relative w-full sm:max-w-md">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-border-light rounded-lg leading-5 bg-surface text-text-main placeholder-text-muted focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm shadow-sm" placeholder="Quick search by ID..." type="text"/>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 border border-primary/30 bg-primary/5 rounded-lg text-sm font-medium text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+                                    Advanced Search
+                                </button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 py-2 border border-border-light bg-surface rounded-lg text-sm font-medium text-text-muted hover:text-text-main hover:bg-gray-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                                    Sort
+                                </button>
+</div>
+</div>
+<div class="pt-4 pb-2 border-t border-border-light">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-muted uppercase tracking-wide">Patient Name</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 material-symbols-outlined text-[18px] text-gray-400">person</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface border border-border-light rounded-lg text-sm text-text-main placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" placeholder="e.g. Smith" type="text"/>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-muted uppercase tracking-wide">Modality</label>
+<select class="w-full px-3 py-2 bg-surface border border-border-light rounded-lg text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm">
+<option class="bg-surface" value="">Any Modality</option>
+<option class="bg-surface" value="CT">CT - Computed Tomography</option>
+<option class="bg-surface" value="MR">MR - Magnetic Resonance</option>
+<option class="bg-surface" value="US">US - Ultrasound</option>
+<option class="bg-surface" value="DX">DX - Digital X-Ray</option>
+<option class="bg-surface" value="XA">XA - X-Ray Angiography</option>
+</select>
+</div>
+<div class="md:col-span-4 flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-muted uppercase tracking-wide">Date Range</label>
+<div class="grid grid-cols-2 gap-2">
+<input class="w-full px-2 py-2 bg-surface border border-border-light rounded-lg text-sm text-text-muted focus:text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" title="Start Date" type="date"/>
+<input class="w-full px-2 py-2 bg-surface border border-border-light rounded-lg text-sm text-text-muted focus:text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" title="End Date" type="date"/>
+</div>
+</div>
+<div class="md:col-span-8 flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-text-muted uppercase tracking-wide">Annotation Keywords</label>
+<div class="relative">
+<span class="absolute left-3 top-2.5 material-symbols-outlined text-[18px] text-gray-400">label</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface border border-border-light rounded-lg text-sm text-text-main placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm" placeholder="Search within annotations (e.g. 'nodule', 'fracture', 'review')" type="text"/>
+</div>
+</div>
+<div class="md:col-span-4 flex items-end justify-end gap-3">
+<button class="px-4 py-2 text-sm font-medium text-text-muted hover:text-text-main transition-colors">Clear</button>
+<button class="flex-1 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">search</span>
+                                        Apply Filters
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto bg-surface">
+<table class="min-w-full text-left whitespace-nowrap">
+<thead>
+<tr class="bg-gray-50 border-b border-border-light">
+<th class="px-6 py-3 w-12 text-center" scope="col">
+<input class="rounded bg-surface border-gray-300 text-primary focus:ring-primary/50" type="checkbox"/>
+</th>
+<th class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Patient Name / ID</th>
+<th class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Modality</th>
+<th class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Study Date</th>
+<th class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Size</th>
+<th class="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Status</th>
+<th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-text-muted" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-center">
+<input class="rounded bg-surface border-gray-300 text-primary focus:ring-primary/50" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Doe, John</span>
+<span class="text-xs text-text-muted">PID: 84920-12</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200">
+                                            CT Chest
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        Oct 24, 2023
+                                    </td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        128 MB
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-[18px] icon-filled">star</span>
+<span class="text-xs font-medium text-text-muted ml-1">Annotated</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-lg text-primary hover:bg-primary/10 transition-colors" title="Open in Viewer">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors" title="Export">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors" title="Delete Local Copy">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-center">
+<input class="rounded bg-surface border-gray-300 text-primary focus:ring-primary/50" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Smith, Jane</span>
+<span class="text-xs text-text-muted">PID: 11029-44</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-700 border border-purple-200">
+                                            MRI Brain
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        Oct 22, 2023
+                                    </td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        450 MB
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-text-muted">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-lg text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-center">
+<input class="rounded bg-surface border-gray-300 text-primary focus:ring-primary/50" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Anon_3391</span>
+<span class="text-xs text-text-muted">PID: 99999-01</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-700 border border-orange-200">
+                                            X-Ray Hand
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        Oct 18, 2023
+                                    </td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        12 MB
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-text-muted">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-lg text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="px-6 py-4 text-center">
+<input class="rounded bg-surface border-gray-300 text-primary focus:ring-primary/50" type="checkbox"/>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-text-main">Project_Beta_001</span>
+<span class="text-xs text-text-muted">PID: 0001-B</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700 border border-green-200">
+                                            Ultrasound
+                                        </span>
+</td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        Sep 30, 2023
+                                    </td>
+<td class="px-6 py-4 text-sm text-text-muted">
+                                        88 MB
+                                    </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-[18px] icon-filled">star</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded-lg text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-text-main hover:bg-gray-100 transition-colors">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+<button class="p-1.5 rounded-lg text-red-500 hover:bg-red-50 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-light flex items-center justify-between bg-surface">
+<p class="text-sm text-text-muted">
+                            Showing <span class="font-medium text-text-main">1</span> to <span class="font-medium text-text-main">4</span> of <span class="font-medium text-text-main">12</span> results
+                        </p>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm font-medium rounded-md border border-border-light text-text-muted bg-background cursor-not-allowed opacity-50">Previous</button>
+<button class="px-3 py-1 text-sm font-medium rounded-md border border-border-light text-text-main bg-background hover:bg-gray-100 transition-colors">Next</button>
+</div>
+</div>
+</div>
+<div class="border-2 border-dashed border-border-light rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary/50 hover:bg-gray-50 transition-all cursor-pointer group">
+<div class="size-12 rounded-full bg-gray-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-text-muted group-hover:text-primary transition-colors text-3xl">folder_zip</span>
+</div>
+<h3 class="text-text-main font-medium mb-1">Drag and drop DICOM folders here</h3>
+<p class="text-text-muted text-sm">or click to select files from your computer</p>
+</div>
+</div>
+</div>
+<footer class="h-14 flex items-center justify-between px-8 border-t border-border-light bg-surface shrink-0 z-10 text-xs text-text-muted">
+<div class="flex gap-6">
+<a class="hover:text-text-main transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-text-main transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-text-main transition-colors" href="#">About Us</a>
+<a class="hover:text-text-main transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex items-center gap-2 opacity-80">
+<span class="material-symbols-outlined text-[16px]">shield</span>
+<span>All processing is client-side for your privacy</span>
+</div>
+</footer>
+</main>
+</body></html>

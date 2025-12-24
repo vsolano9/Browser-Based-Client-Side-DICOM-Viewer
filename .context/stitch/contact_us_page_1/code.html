@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - DICOM Viewer</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1c2127",
+                        "border-dark": "#3b4754",
+                        "text-secondary": "#9dabb9"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased min-h-screen flex flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#283039] bg-[#111418] px-4 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-3xl">view_comfy_alt</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">DICOM Viewer</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Viewer</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Contact</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Sign In</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex justify-center py-10 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-[1200px] flex flex-col gap-10">
+<!-- Page Heading -->
+<div class="flex flex-col gap-3 text-center md:text-left">
+<h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">How can we help you?</h1>
+<p class="text-text-secondary text-lg font-normal leading-normal max-w-2xl">
+                    Our team of imaging experts is here to assist with technical issues, enterprise inquiries, or general feedback.
+                </p>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
+<!-- Left Column: Contact Info & Feature Cards -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<h2 class="text-white text-xl font-bold mb-2">Contact Information</h2>
+<!-- Email Card -->
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 transition-transform hover:scale-[1.01]">
+<div class="text-primary flex items-start pt-1">
+<span class="material-symbols-outlined !text-3xl">mail</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-base font-bold leading-tight">Email Support</h3>
+<p class="text-text-secondary text-sm font-normal mb-1">For general inquiries and support.</p>
+<a class="text-primary text-sm font-medium hover:underline" href="mailto:support@dicomviewer.com">support@dicomviewer.com</a>
+</div>
+</div>
+<!-- Phone Card -->
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 transition-transform hover:scale-[1.01]">
+<div class="text-primary flex items-start pt-1">
+<span class="material-symbols-outlined !text-3xl">call</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-base font-bold leading-tight">Phone</h3>
+<p class="text-text-secondary text-sm font-normal mb-1">Mon-Fri from 8am to 5pm EST.</p>
+<a class="text-primary text-sm font-medium hover:underline" href="tel:+15551234567">+1 (555) 123-4567</a>
+</div>
+</div>
+<!-- Office Card -->
+<div class="flex gap-4 rounded-xl border border-border-dark bg-surface-dark p-5 transition-transform hover:scale-[1.01]">
+<div class="text-primary flex items-start pt-1">
+<span class="material-symbols-outlined !text-3xl">location_on</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-base font-bold leading-tight">Headquarters</h3>
+<p class="text-text-secondary text-sm font-normal">123 Medical Drive, Suite 400<br/>Health City, MedState 90210</p>
+<div class="mt-4 w-full h-32 rounded-lg bg-gray-700 relative overflow-hidden group cursor-pointer" title="View on Map">
+<!-- Abstract map placeholder -->
+<div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center" data-alt="Stylized dark map showing location of headquarters" data-location="Health City" style="https://lh3.googleusercontent.com/aida-public/AB6AXuCBL9rH4sZ_XmIeG4dsKxDY6cBwsOVd41eMv7cq8HA78XCvxKQ_Sco3Do39wpKo9vFar-GpnDCgrl-5xVv5lovL0CN9RqdOG6_9rBsQpGuL5AKdUGevWrq6tjXXmLMwDxQAKtOpxcfH5gTSQ2MNIpC64S6qXsBc92xnJGSeZh5fPPiZcbGP3fMpiTmZIl--FrHiKvJRWK6eTUVVhi3Rtjnlgk6l8BhQqOi7Pvkj-miCly5bs9te55Sqk_29YdXe-RcQZK_ozAQpvGiU">
+<span class="material-symbols-outlined text-gray-600 !text-5xl group-hover:text-primary transition-colors">map</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FAQ Teaser -->
+<div class="mt-4 p-4 rounded-lg bg-primary/10 border border-primary/20">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary">help</span>
+<h4 class="text-white font-semibold">Looking for quick answers?</h4>
+</div>
+<p class="text-text-secondary text-sm mb-3">Check out our documentation for guides on DICOM integration and viewer controls.</p>
+<a class="text-white text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all" href="#">
+                            Visit Help Center <span class="material-symbols-outlined !text-base">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Inquiry Form -->
+<div class="lg:col-span-7">
+<div class="rounded-2xl border border-border-dark bg-[#111418] p-6 md:p-8 shadow-xl">
+<h2 class="text-white text-2xl font-bold mb-6">Send us a message</h2>
+<form class="flex flex-col gap-5">
+<!-- Name & Email Row -->
+<div class="flex flex-col md:flex-row gap-5">
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Full Name</span>
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-dark bg-surface-dark focus:border-primary h-12 placeholder:text-text-secondary/50 px-4 text-base" placeholder="Dr. Jane Doe" type="text"/>
+</label>
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Work Email</span>
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-dark bg-surface-dark focus:border-primary h-12 placeholder:text-text-secondary/50 px-4 text-base" placeholder="jane@hospital.com" type="email"/>
+</label>
+</div>
+<!-- Topic Select -->
+<label class="flex flex-col w-full">
+<span class="text-white text-sm font-medium leading-normal pb-2">Inquiry Type</span>
+<div class="relative">
+<select class="form-select w-full appearance-none rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-dark bg-surface-dark focus:border-primary h-12 px-4 text-base pr-10 cursor-pointer">
+<option disabled="" selected="" value="">Select a topic...</option>
+<option value="technical">Technical Support</option>
+<option value="sales">Sales &amp; Enterprise</option>
+<option value="feedback">Product Feedback</option>
+<option value="other">Other</option>
+</select>
+<!-- Custom arrow icon for select -->
+<div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+<!-- Message Textarea -->
+<label class="flex flex-col w-full">
+<span class="text-white text-sm font-medium leading-normal pb-2">Message</span>
+<textarea class="form-textarea w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-dark bg-surface-dark focus:border-primary min-h-[160px] placeholder:text-text-secondary/50 p-4 text-base resize-y" placeholder="Describe your issue or inquiry in detail..."></textarea>
+</label>
+<!-- File Upload Area -->
+<div class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium leading-normal">Attachments (Optional)</span>
+<div class="border-2 border-dashed border-border-dark rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-surface-dark/50 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary mb-2 !text-3xl">cloud_upload</span>
+<p class="text-white text-sm font-medium">Click to upload or drag and drop</p>
+<p class="text-text-secondary text-xs">SVG, PNG, JPG or LOG (max. 10MB)</p>
+</div>
+</div>
+<!-- HIPAA Warning -->
+<div class="bg-red-500/10 border border-red-500/20 rounded-lg p-3 flex gap-3 items-start mt-2">
+<span class="material-symbols-outlined text-red-400 !text-xl mt-0.5">warning</span>
+<p class="text-red-200 text-xs leading-relaxed">
+<strong>HIPAA/GDPR Warning:</strong> Please do not upload files containing Protected Health Information (PHI) or unanonymized Patient Data via this form. For secure data transfer, please contact our enterprise team.
+                                </p>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white rounded-lg font-bold text-base transition-all shadow-lg hover:shadow-primary/20" type="button">
+<span>Send Message</span>
+<span class="material-symbols-outlined !text-xl">send</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="border-t border-border-dark bg-[#111418] py-8 mt-auto">
+<div class="max-w-[1200px] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-text-secondary text-sm">© 2023 DICOM Viewer Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<!-- Twitter/X Icon abstract -->
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<!-- LinkedIn Icon abstract -->
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+</a>
+<a class="text-text-secondary hover:text-white transition-colors" href="#">
+<!-- GitHub Icon abstract -->
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

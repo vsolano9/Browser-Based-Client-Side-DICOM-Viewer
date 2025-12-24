@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DICOM Viewer - Secure Browser-Based Imaging</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b82f6", 
+                        "primary-dark": "#1d4ed8",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#020617", 
+                        "surface-dark": "#0f172a", 
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 font-display transition-colors duration-300">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden pb-16">
+<div class="fixed top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-blue-100/40 via-white/80 to-background-light pointer-events-none -z-10"></div>
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+<div class="layout-container flex justify-center">
+<div class="w-full max-w-[1280px] px-4 md:px-10 py-3 flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-3 text-slate-900 group cursor-pointer">
+<div class="flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">monitor_heart</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">OpenDICOM</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<div class="flex items-center gap-6">
+<a class="text-slate-600 text-sm font-medium hover:text-primary transition-colors" href="#demo">Demo Study</a>
+<a class="text-slate-600 text-sm font-medium hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="text-slate-600 text-sm font-medium hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span>GitHub</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary hover:bg-blue-600 text-white text-sm font-bold transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40">
+<span class="truncate">Launch App</span>
+</button>
+</div>
+<div class="md:hidden text-slate-900">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col items-center">
+<section class="w-full max-w-[1280px] px-4 md:px-10 py-12 md:py-20 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-400/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+<div class="flex flex-col gap-10 md:flex-row items-center">
+<div class="flex flex-col gap-6 flex-1 max-w-xl z-10">
+<div class="flex flex-col gap-4 text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 w-fit">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+<span class="text-xs font-semibold text-blue-800 uppercase tracking-wide">Client-Side Only</span>
+</div>
+<h1 class="text-slate-900 text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl">
+                                Instant DICOM Viewing. <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Zero Uploads.</span>
+</h1>
+<p class="text-slate-600 text-lg leading-relaxed max-w-lg">
+                                Analyze medical imaging directly in your browser. Your patient data never leaves your device, ensuring 100% HIPAA &amp; GDPR compliance. No servers, no latency.
+                            </p>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center justify-center rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 text-white font-bold transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 gap-2">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Select Local Folder</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-12 px-6 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold transition-all border border-slate-200">
+<span>Try Demo Study</span>
+</button>
+</div>
+<p class="text-xs text-slate-500 mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                            Supports .dcm, DICOMDIR, and standard medical image formats.
+                        </p>
+</div>
+<div class="w-full flex-1 flex justify-center md:justify-end z-10">
+<div class="relative w-full max-w-[500px] aspect-square md:aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-300 bg-white backdrop-blur-sm flex flex-col items-center justify-center p-8 text-center group hover:border-primary/50 transition-all cursor-pointer shadow-xl shadow-slate-200/50">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
+<div class="mb-6 p-5 rounded-full bg-slate-50 text-slate-400 group-hover:text-primary group-hover:scale-110 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[48px]">cloud_upload</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 mb-2">Drag &amp; Drop Files</h3>
+<p class="text-slate-500 text-sm mb-6 max-w-[260px]">
+                                Drag your DICOM folder or files here to instantly render them.
+                            </p>
+<div class="flex items-center gap-4 text-xs font-medium text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-200">
+<div class="flex items-center gap-1.5 text-green-600">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Secure</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-slate-300"></div>
+<div class="flex items-center gap-1.5 text-blue-600">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+<span>Fast</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full bg-white py-20 border-y border-slate-200 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="w-full max-w-[1280px] px-4 md:px-10 mx-auto relative z-10">
+<div class="flex flex-col gap-12">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="text-3xl font-bold tracking-tight mb-4 text-slate-900">Why use OpenDICOM?</h2>
+<p class="text-slate-600 text-lg">Built for speed, privacy, and clinical-grade rendering without the server lag. Ideal for quick reviews and patient consultations.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="group flex flex-col gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-8 hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-500/30 transition-all duration-300">
+<div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[32px]">shield_lock</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Private by Design</h3>
+<p class="text-slate-600 leading-relaxed">
+                                        Processing happens locally on your CPU/GPU using WebAssembly. No PHI (Protected Health Information) is ever sent to the cloud.
+                                    </p>
+</div>
+</div>
+<div class="group flex flex-col gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-8 hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-500/30 transition-all duration-300">
+<div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[32px]">tune</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Standard Tools</h3>
+<p class="text-slate-600 leading-relaxed">
+                                        Includes Window/Level presets, Pan, Zoom, Invert, and Length/Angle measurement tools out of the box.
+                                    </p>
+</div>
+</div>
+<div class="group flex flex-col gap-5 rounded-2xl border border-slate-200 bg-slate-50 p-8 hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-500/30 transition-all duration-300">
+<div class="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[32px]">dataset</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">Broad Format Support</h3>
+<p class="text-slate-600 leading-relaxed">
+                                        Supports standard single-frame and multi-frame .dcm files, DICOMDIR, and common medical image formats.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full max-w-[1280px] px-4 md:px-10 py-16 md:py-24" id="demo">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-6">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 mb-2">Try Sample Studies</h2>
+<p class="text-slate-600">Don't have a file handy? Click any sample below to load the viewer.</p>
+</div>
+<a class="text-primary font-bold hover:text-blue-700 hover:underline flex items-center gap-1 transition-colors" href="#">
+                            View All Samples <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+<div class="group cursor-pointer flex flex-col gap-3 p-3 rounded-2xl hover:bg-white hover:shadow-md transition-all">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-200 border border-slate-300 group-hover:border-primary/50 transition-colors">
+<div class="absolute inset-0 bg-cover bg-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" data-alt="CT Scan of Chest showing rib cage and lungs in grayscale" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDKtep7Og4mYZxkaGE6Q3sU0QDq6jjpIphJ4N5-6HTfsLK-oJGp3O1CCtkiCe_YO76zQuzneWv0b2xBr1mtPJuQdvNqLXxaWP4bHPmqtFmRmhAfLOpFLt1am4oPaMGJzVJtybkZSp9iVG11TZqlTthKFqCDykDlDXfTueTIIUWg91ZW4HfRfkph9FOtYPRQZ_P2qmW4UIAfOa9FMA0AW2m_rEUASvN6mDANrIClUyS4iqbCi35xydWNJSot9IE8bJdpSlfE3Jys8OS0");'>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border border-slate-200 shadow-sm">CT</div>
+</div>
+<div class="px-1">
+<h3 class="text-slate-900 font-bold group-hover:text-primary transition-colors">Chest CT</h3>
+<p class="text-slate-500 text-xs mt-1 font-medium">512 slices • 1.2mm</p>
+</div>
+</div>
+<div class="group cursor-pointer flex flex-col gap-3 p-3 rounded-2xl hover:bg-white hover:shadow-md transition-all">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-200 border border-slate-300 group-hover:border-primary/50 transition-colors">
+<div class="absolute inset-0 bg-cover bg-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" data-alt="MRI Scan of Human Brain from side profile view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABZpESEojyQ9hk0kHuS6JFqDjalGCgjUm_-qVfQgtbJ7VpcOP3C0Mje148AAF2gxxTS0Oxxpqr9r0FPeE0ZtGF5W3u-wSMp-RWyqm6TUO9ViD13Q6scl405hi2AjwdC6GGJZum36jlylKjWHlntDzemnDVns3h5NcwNSDMSrtmxyXqw8AljM6Xb_G0fdzYPi_DyvmaGikwMhmuqsfjNO1LvnGUXNk6rx-qAj-ksaKFqO2L_tHyD2c8Azlv-X07L2BR6_RI7pUZen2B");'>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border border-slate-200 shadow-sm">MRI</div>
+</div>
+<div class="px-1">
+<h3 class="text-slate-900 font-bold group-hover:text-primary transition-colors">Brain MRI</h3>
+<p class="text-slate-500 text-xs mt-1 font-medium">T2 Weighted • Sagittal</p>
+</div>
+</div>
+<div class="group cursor-pointer flex flex-col gap-3 p-3 rounded-2xl hover:bg-white hover:shadow-md transition-all">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-200 border border-slate-300 group-hover:border-primary/50 transition-colors">
+<div class="absolute inset-0 bg-cover bg-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" data-alt="X-Ray of human hand showing bone structure" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlU31hhWVPyYpjUotaQ7WCmZgRJVSGZK_oDOUgXai_VZLDpj693usfNbOrV6xuvLZP3VkjtoiGPl66W-18EYK0TmBMfZpD6LG2riv2Hs5uLGlpJFcTZt2jQh2cK-KeaWW_7_gC724CfV67RhI7_z10p_gRPhWuNQt4B1PuVw2FWTVlgsQpVHsPEyjhUrCixAXVUkOft3M1Niri3YL4BZuQzG7hBS9b3IIBXRsj_8PuvxY-yp8xjNKA0_7JPGrxJmIObLq-rxJeHubj");'>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border border-slate-200 shadow-sm">CR</div>
+</div>
+<div class="px-1">
+<h3 class="text-slate-900 font-bold group-hover:text-primary transition-colors">Hand X-Ray</h3>
+<p class="text-slate-500 text-xs mt-1 font-medium">Trauma Series</p>
+</div>
+</div>
+<div class="group cursor-pointer flex flex-col gap-3 p-3 rounded-2xl hover:bg-white hover:shadow-md transition-all">
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-200 border border-slate-300 group-hover:border-primary/50 transition-colors">
+<div class="absolute inset-0 bg-cover bg-center opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" data-alt="Angiogram showing blood vessels with high contrast" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4xQqlf56976XyNjbo7Fn2ksrc8PjQ04T_IPajfvdRo_xVWZFTQIccqwuTtc7ZChuvovp26KMsHHLlpa3bCtximkcPQ8Rwg7rPdys2G9Nwt9RqNPC_xu6CzbTYLWoxXRhNkDootZeoXN8HXk3dRLzwrcslr4TOmWeY-01bPuCOkfbvjLdQxTUO2Cs1CFR-uEDne7Ehc79Sgt1aQk95NM1pO7WctLpCyNCp2HnaYzy82EjscQvpQP6TMDYBUkL-Y3VINeZoTl3dhobu");'>
+</div>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border border-slate-200 shadow-sm">XA</div>
+</div>
+<div class="px-1">
+<h3 class="text-slate-900 font-bold group-hover:text-primary transition-colors">Angiography</h3>
+<p class="text-slate-500 text-xs mt-1 font-medium">Coronary Arteries</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full bg-slate-100 py-24 px-4 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<div class="max-w-[800px] mx-auto text-center flex flex-col gap-8 items-center relative z-10">
+<div class="w-20 h-20 rounded-2xl bg-white shadow-xl shadow-slate-200 flex items-center justify-center text-green-500 rotate-3 hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[42px]">verified_user</span>
+</div>
+<div>
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
+                            Your Data Stays With You
+                        </h2>
+<p class="text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+                            We utilize advanced WebAssembly technology to render images strictly on the client-side. No medical data is ever uploaded, stored, or analyzed by our servers.
+                        </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+<button class="h-12 px-8 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors shadow-lg shadow-black/10">
+                            Read Security Whitepaper
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full bg-white border-t border-slate-200 pt-12 pb-24 px-4 md:px-10">
+<div class="max-w-[1280px] mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row justify-between gap-8">
+<div class="flex flex-col gap-4 max-w-sm">
+<div class="flex items-center gap-2 text-slate-900">
+<span class="material-symbols-outlined text-primary">monitor_heart</span>
+<span class="font-bold text-lg">OpenDICOM</span>
+</div>
+<p class="text-slate-500 text-sm leading-relaxed">
+                            An open-source, browser-based medical imaging viewer designed for speed, privacy, and accessibility.
+                        </p>
+</div>
+<div class="flex flex-wrap gap-12 text-sm">
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900">Product</h4>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Demo</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Updates</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900">Resources</h4>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">GitHub</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">License</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-slate-900">Legal</h4>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-xs text-slate-400">
+                        © 2023 OpenDICOM Project. All rights reserved.
+                    </p>
+<p class="text-xs text-slate-500 text-center md:text-right max-w-lg">
+<strong>Disclaimer:</strong> This viewer is for educational and investigational purposes only. It is not FDA/CE cleared for primary diagnosis. Users should verify findings with certified diagnostic software.
+                    </p>
+</div>
+</div>
+</footer>
+<div class="fixed bottom-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-3 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs md:text-sm">
+<div class="flex items-center gap-2 text-slate-700">
+<span class="material-symbols-outlined text-[18px] text-green-600">lock_open_right</span>
+<span class="font-medium">All processing is <span class="text-green-600 font-bold">client-side</span> for your privacy.</span>
+</div>
+<div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-slate-500 font-medium">
+<a class="hover:text-primary transition-colors" href="#">About Us</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Us</a>
+<div class="w-px h-3 bg-slate-300 hidden sm:block"></div>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

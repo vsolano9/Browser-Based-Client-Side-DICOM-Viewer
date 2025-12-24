@@ -1,0 +1,588 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DICOM Web Viewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "panel-dark": "#16202a",
+                        "surface-dark": "#1c2834",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151; 
+        }input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #137fec;
+            cursor: pointer;
+            margin-top: -6px; 
+            box-shadow: 0 0 0 2px #101922;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #374151;
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display h-screen flex flex-col overflow-hidden selection:bg-primary selection:text-white">
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"></div>
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#283039] bg-panel-dark px-6 py-3 shrink-0 z-20">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded text-primary">
+<span class="material-symbols-outlined">local_hospital</span>
+</div>
+<div>
+<h2 class="text-white text-lg font-bold leading-tight">DICOM Web Viewer</h2>
+<p class="text-xs text-slate-400 font-medium tracking-wide">v2.4.0 • CLOUD PACS</p>
+</div>
+</div>
+<div class="hidden md:flex flex-col items-center justify-center">
+<div class="flex items-center gap-2">
+<span class="text-white font-bold tracking-wide">DOE, JOHN</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-700 text-slate-300">M, 45Y</span>
+</div>
+<div class="text-xs text-slate-400 mt-0.5">ID: 55920 • Study: 27 Oct 2023</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-3 mr-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors text-sm font-medium text-slate-300 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+<span class="hidden sm:inline">Open File</span>
+</button>
+<div class="hidden xl:flex items-center bg-[#1c2834] rounded-lg border border-slate-700 p-0.5 shadow-sm">
+<button class="flex items-center gap-1.5 px-3 py-1 rounded hover:bg-white/10 text-xs font-medium text-slate-300 hover:text-white transition-colors group relative" title="Import Annotations from Local File">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-primary transition-colors">upload_file</span>
+<span>Import</span>
+</button>
+<div class="w-px h-4 bg-slate-700 mx-0.5"></div>
+<button class="flex items-center gap-1.5 px-3 py-1 rounded hover:bg-white/10 text-xs font-medium text-slate-300 hover:text-white transition-colors group relative" title="Save Annotations Locally (JSON)">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-primary transition-colors">download</span>
+<span>Save</span>
+</button>
+</div>
+</div>
+<div class="w-px h-6 bg-slate-700 hidden lg:block"></div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 text-white border border-white/5 shadow-sm text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[20px]">assignment_ind</span>
+<span class="hidden sm:inline">Info</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors text-sm font-medium text-slate-300 hover:text-white">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="hidden sm:inline">Settings</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary hover:bg-blue-600 transition-colors text-white text-sm font-bold shadow-lg shadow-blue-900/20">
+<span>Close Case</span>
+</button>
+<div class="relative ml-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border-2 border-slate-700" data-alt="User Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBDwFYQG5q0EpNeqXHj_X_FKDOzZCHZfaXxOsWufG2AXJqifoD3G1OAZw8Hxpsrfw15ZvFSlgIbCr-wRJ4oazL-XN5O_ePKlBjOtYTdWC_WZQti7D_Z73Vc4qCXe5JOUPC7F-SaEo9xccEEUvmO-A0qZjyJisKELKxj98zspRYCUJSHouSNi1Z_kBT9RS9jxwbak0X8PPYJfFhSFx2KxOnm-kuXzMJ5S6ORAnmeudT_Tor8F_kVdtvlkFDRieG2kE19x6IGhSBFEUSK");'></div>
+<div class="absolute bottom-0 right-0 size-2.5 bg-green-500 rounded-full border-2 border-panel-dark"></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative">
+<aside class="w-72 flex flex-col border-r border-[#283039] bg-panel-dark shrink-0">
+<div class="p-4 border-b border-[#283039]">
+<h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Series List (4)</h3>
+</div>
+<div class="flex-1 overflow-y-auto p-3 space-y-3">
+<div class="group relative flex flex-col gap-2 p-2 rounded-lg bg-surface-dark border border-slate-700 hover:border-primary cursor-pointer transition-all hover:bg-[#1f2d3b]">
+<div class="relative w-full aspect-[4/3] bg-black rounded overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="CT Scout Scan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzgKbgjvZqzIyw2yilXdZICmlq_m2TxB11QMoS5L2GDMrOgTRqaZw3L7oCwi2Hg2cNMjJp_a5Gl1XS9E_HMg1A6gvoyZ0ozwHOyFvR31eqpH_qs5IglXszf-9lvrxMBGfkfTnuCwytqflL8b_t-LZYFvpLsfwl5EQNOYrZx86aoR5_futbSQe1YJuB8gv6ql5z458NVcpcXKD04v1YIoCU9iRfV2YnomhGLEPKjMeWAJpMZvtM9EmzmGkVXhbnl41E7IgoeP9MfN3T');"></div>
+<div class="absolute bottom-1 right-1 bg-black/70 px-1.5 rounded text-[10px] font-mono text-white">2 Images</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-200">1: Scout</p>
+<p class="text-xs text-slate-500">Localizer</p>
+</div>
+</div>
+<div class="group relative flex flex-col gap-2 p-2 rounded-lg bg-[#1a2c3d] border border-primary shadow-[0_0_0_1px_#137fec] cursor-pointer">
+<div class="relative w-full aspect-[4/3] bg-black rounded overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="CT Head Axial Scan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApLjpFlEgiHQ7XMECUuYxkCrtThxxGAV-qVG7Ml0euJwn488MIHboMxvU_vu9k_pqhUFNTVGD2VGrr8xSDewL-qFAjdhYhqDdF0sygLAY7v3K9hofJSVfMnLCz8gRwOraSzOVhi59k1kKw7ESgnDiwQ4WZtlHm66bkB6XxH664T26LS61ME2ywTpcYaW3AsopRZkdeIzVzDjDLm1VIglxcDduBP_kZ-iueH2e0H_1-GbFtAe1oKSNjQh5QXLAT1EWHm4ndyDFO-l5E');"></div>
+<div class="absolute bottom-1 right-1 bg-primary/90 px-1.5 rounded text-[10px] font-mono text-white">200 Images</div>
+<div class="absolute top-1 left-1"><span class="material-symbols-outlined text-green-400 text-[16px]">check_circle</span></div>
+</div>
+<div>
+<p class="text-sm font-semibold text-white">2: Head Axial</p>
+<p class="text-xs text-slate-400">2.5mm STD</p>
+</div>
+</div>
+<div class="group relative flex flex-col gap-2 p-2 rounded-lg bg-surface-dark border border-slate-700 hover:border-primary cursor-pointer transition-all hover:bg-[#1f2d3b]">
+<div class="relative w-full aspect-[4/3] bg-black rounded overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="CT Head Coronal" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA64S9CKcOfEiEtt-XoCYA_Btk5XkxCBaaUm61ZD4ryHFsRAjmXAKYhRgtPwBwPRuGwegHLRNsm4DH0-VRGzVI0o284jgmj2BaEf5xDIwgWAAQdhNb_7LPSJ0uFsT4iJpKLD4DtqVl-MxytOhHhWL0E_ghtJUCSJ5c1idMe_gjAXVUpxWlbWJ0hvrv60LN3TB2klX1_BDew-bMerxHmYX84DejwZLk2cWJvTABKshYIKZ-XjpuHW8QSdgH7wVoBUbMYjeqr6-i5dtrC');"></div>
+<div class="absolute bottom-1 right-1 bg-black/70 px-1.5 rounded text-[10px] font-mono text-white">185 Images</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-200">3: Head Coronal</p>
+<p class="text-xs text-slate-500">MPR Reformatted</p>
+</div>
+</div>
+<div class="group relative flex flex-col gap-2 p-2 rounded-lg bg-surface-dark border border-slate-700 hover:border-primary cursor-pointer transition-all hover:bg-[#1f2d3b]">
+<div class="relative w-full aspect-[4/3] bg-black rounded overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="CT Bone Window" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdRR4sh8I_vAK9CerUt7rYVD8gTj2qqFzaoNVTVL6CHmvehJHdBAvIMPjITcX5_JsjihaxeqEnDAp9SI8geOg3b9NqYA9FF_FGR9bQZ5sCuyz5BpyqUys90Y25eq8asnDSdKLnC4AY07liOJHvRHNcFmI3AR4db-rXuijY0HJQ2qPn3U7Hjkj_rz7HpdO53M0Mmi98jH6jxCc7b2d3sPAWOBE7ESgXUCaIIVOjTWGdoDq94S1t1ZAj3YEApFWtx101O5KjlXBmKl_E');"></div>
+<div class="absolute bottom-1 right-1 bg-black/70 px-1.5 rounded text-[10px] font-mono text-white">200 Images</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-200">4: Bone Window</p>
+<p class="text-xs text-slate-500">High Res</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-[#000000]">
+<div class="flex items-center justify-between px-4 py-2 bg-surface-dark border-b border-[#283039]">
+<div class="flex items-center gap-1">
+<button class="p-2 rounded hover:bg-white/10 text-slate-300 group relative" title="Scroll">
+<span class="material-symbols-outlined group-hover:text-white">layers</span>
+</button>
+<button class="p-2 rounded bg-primary text-white shadow-sm" title="Pan">
+<span class="material-symbols-outlined">pan_tool</span>
+</button>
+<button class="p-2 rounded hover:bg-white/10 text-slate-300 group" title="Zoom">
+<span class="material-symbols-outlined group-hover:text-white">zoom_in</span>
+</button>
+<div class="w-px h-6 bg-slate-700 mx-1"></div>
+<button class="p-2 rounded hover:bg-white/10 text-slate-300 group" title="Window/Level">
+<span class="material-symbols-outlined group-hover:text-white">contrast</span>
+</button>
+<button class="p-2 rounded hover:bg-white/10 text-slate-300 group" title="Invert">
+<span class="material-symbols-outlined group-hover:text-white">invert_colors</span>
+</button>
+<button class="p-2 rounded hover:bg-white/10 text-slate-300 group" title="Reset">
+<span class="material-symbols-outlined group-hover:text-white">restart_alt</span>
+</button>
+<div class="w-px h-6 bg-slate-700 mx-1"></div>
+<div class="flex items-center bg-black/20 rounded-lg border border-slate-700/50 p-0.5 gap-0.5" title="Advanced Measurement Tools">
+<button class="p-1.5 px-2 rounded hover:bg-white/10 text-slate-300 group" title="Length Measurement">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white">straighten</span>
+</button>
+<button class="p-1.5 px-2 rounded hover:bg-white/10 text-slate-300 group" title="Angle Measurement">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white">square_foot</span>
+</button>
+<button class="p-1.5 px-2 rounded hover:bg-white/10 text-slate-300 group" title="Freehand Annotation">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white">draw</span>
+</button>
+<button class="p-1.5 px-2 rounded hover:bg-white/10 text-slate-300 group" title="Density (HU) Probe">
+<span class="material-symbols-outlined text-[20px] group-hover:text-white">colorize</span>
+</button>
+</div>
+<button class="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-dark border border-slate-600 hover:border-primary text-slate-300 hover:text-white hover:bg-surface-dark transition-all shadow-sm group" title="Enable 3D Reconstruction">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors">view_in_ar</span>
+<span class="text-xs font-bold tracking-wide">3D</span>
+</button>
+</div>
+<div class="flex items-center bg-[#101922] p-1 rounded-lg border border-slate-700">
+<button class="p-1.5 px-3 rounded bg-surface-dark text-white shadow-sm text-xs font-bold">1x1</button>
+<button class="p-1.5 px-3 rounded hover:bg-white/5 text-slate-400 text-xs font-medium">1x2</button>
+<button class="p-1.5 px-3 rounded hover:bg-white/5 text-slate-400 text-xs font-medium">2x2</button>
+</div>
+</div>
+<div class="relative flex-1 bg-black flex items-center justify-center overflow-hidden">
+<div class="relative h-full w-full max-h-[95vh] max-w-[95vw] flex items-center justify-center">
+<div class="aspect-square h-full max-h-full bg-contain bg-center bg-no-repeat" data-alt="CT Scan of Brain Axial View" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBJ62rfcAfLtUDAGOt5-AMGdLTC8giy_7RKgkwYc9QCzQ9pV21ctnBA3FANZ0Xzt8UO3jWX3skJqL2WgwVBxs1e4XVwpRdPhPVWSrfmw-0oeEq4d79DdRG9H1Msi6nxqCr7-GqJxXqww2_--TC5WOIFGoLZgk2Y834TLSA-BIJrJTWI3Dj0LKXaRAwIYzHYe914se0npfRrejaHGupbvdRyecf-jJaQX_e3E6tgg4nOUBDUGT61ElqsYUgPMgyaaXwpiJA2-dNsYrs'); filter: contrast(1.2) brightness(1.1);">
+</div>
+</div>
+<div class="absolute top-4 left-4 text-sm font-mono text-primary/90 pointer-events-none select-none drop-shadow-md">
+<p class="font-bold text-lg text-primary">DOE, JOHN</p>
+<p>ID: 55920</p>
+<p>DOB: 1978-05-20 (45Y, M)</p>
+<p class="mt-2 text-yellow-500">Series: 2 [Axial]</p>
+</div>
+<div class="absolute top-4 right-4 text-sm font-mono text-white/80 text-right pointer-events-none select-none drop-shadow-md">
+<p>GENERAL HOSPITAL</p>
+<p>CT HEAD w/ CONTRAST</p>
+<p>2023-10-27 14:30:22</p>
+<p class="mt-2">Acc: 1029384</p>
+</div>
+<div class="absolute bottom-16 right-4 text-sm font-mono text-white/80 text-right pointer-events-none select-none drop-shadow-md">
+<p>Zoom: 1.25x</p>
+<p>WL: 40 WW: 400</p>
+<p>Thickness: 2.5mm</p>
+</div>
+<div class="absolute bottom-16 left-4 text-sm font-mono text-white/80 pointer-events-none select-none drop-shadow-md">
+<p>KV: 120, mA: 200</p>
+<p>Matrix: 512x512</p>
+<p>FOV: 220mm</p>
+</div>
+<div class="absolute top-4 left-1/2 -translate-x-1/2 text-white font-bold text-xl drop-shadow-md">A</div>
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 text-white font-bold text-xl drop-shadow-md">P</div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-white font-bold text-xl drop-shadow-md">R</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-white font-bold text-xl drop-shadow-md">L</div>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 pb-6 flex items-center gap-4">
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined">skip_previous</span>
+</button>
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex justify-between text-xs font-mono text-slate-400 px-1">
+<span>Img: 45</span>
+<span>Total: 200</span>
+</div>
+<input class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer" max="200" min="1" type="range" value="45"/>
+</div>
+<button class="text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined">skip_next</span>
+</button>
+</div>
+</div>
+</main>
+<aside class="w-80 bg-panel-dark border-l border-[#283039] shrink-0 flex flex-col transition-all duration-300 ease-in-out relative z-10" id="right-sidebar">
+<div class="flex items-center justify-between h-14 px-4 border-b border-[#283039] bg-panel-dark">
+<span class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+            Patient Info
+        </span>
+<button class="text-slate-400 hover:text-white transition-colors rounded p-1 hover:bg-white/5" title="Collapse Sidebar">
+<span class="material-symbols-outlined text-[20px]">last_page</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<div class="bg-surface-dark border border-slate-700 rounded-lg p-4 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-white text-8xl -mr-6 -mt-6 transform rotate-12">person</span>
+</div>
+<div class="relative z-10">
+<h4 class="text-[10px] font-bold text-primary mb-3 uppercase tracking-wider opacity-90">Patient Details</h4>
+<div class="space-y-4">
+<div>
+<label class="text-[10px] uppercase text-slate-500 font-semibold tracking-wider">Name</label>
+<div class="text-base text-white font-medium tracking-wide">DOE, JOHN</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-[10px] uppercase text-slate-500 font-semibold tracking-wider">Patient ID</label>
+<div class="text-sm text-slate-200 font-mono">55920</div>
+</div>
+<div>
+<label class="text-[10px] uppercase text-slate-500 font-semibold tracking-wider">Birth Date</label>
+<div class="text-sm text-slate-200">1978-05-20</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="text-[10px] uppercase text-slate-500 font-semibold tracking-wider">Sex</label>
+<div class="text-sm text-slate-200">Male</div>
+</div>
+<div>
+<label class="text-[10px] uppercase text-slate-500 font-semibold tracking-wider">Age</label>
+<div class="text-sm text-slate-200">45Y</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-3 pb-1 border-b border-slate-700/50">
+<span class="material-symbols-outlined text-primary text-sm">folder_shared</span>
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Study Information</h4>
+</div>
+<div class="space-y-3 px-1">
+<div class="group">
+<label class="text-[10px] text-slate-500 block mb-0.5">Study Description</label>
+<div class="text-sm text-slate-200 font-medium leading-snug">CT HEAD w/ CONTRAST</div>
+</div>
+<div class="group">
+<label class="text-[10px] text-slate-500 block mb-0.5">Study Date</label>
+<div class="text-sm text-slate-300">27 Oct 2023, 14:30:22</div>
+</div>
+<div class="group">
+<label class="text-[10px] text-slate-500 block mb-0.5">Accession Number</label>
+<div class="text-sm text-slate-300 font-mono bg-surface-dark/50 px-2 py-1 rounded inline-block border border-slate-700/50">1029384</div>
+</div>
+<div class="group">
+<label class="text-[10px] text-slate-500 block mb-0.5">Referring Physician</label>
+<div class="text-sm text-slate-300">Dr. Sarah Bennett</div>
+</div>
+<div class="group">
+<label class="text-[10px] text-slate-500 block mb-0.5">Institution Name</label>
+<div class="text-sm text-slate-300">GENERAL HOSPITAL</div>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-3 pb-1 border-b border-slate-700/50">
+<span class="material-symbols-outlined text-primary text-sm">settings_applications</span>
+<h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Technical Details</h4>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-dark p-2 rounded border border-slate-800">
+<div class="text-[10px] text-slate-500">Modality</div>
+<div class="text-xs text-white font-medium">CT</div>
+</div>
+<div class="bg-surface-dark p-2 rounded border border-slate-800">
+<div class="text-[10px] text-slate-500">Manufacturer</div>
+<div class="text-xs text-white font-medium">GE Medical</div>
+</div>
+<div class="bg-surface-dark p-2 rounded border border-slate-800">
+<div class="text-[10px] text-slate-500">Slice Thickness</div>
+<div class="text-xs text-white font-medium">2.5mm</div>
+</div>
+<div class="bg-surface-dark p-2 rounded border border-slate-800">
+<div class="text-[10px] text-slate-500">KVP / mA</div>
+<div class="text-xs text-white font-medium">120 / 200</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-800 text-center">
+<button class="text-xs text-primary hover:text-blue-400 font-medium flex items-center justify-center gap-1 mx-auto transition-colors">
+<span>View All Metadata Tags</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+<div class="relative w-full max-w-xl bg-panel-dark rounded-xl shadow-2xl border border-slate-700 overflow-hidden transform transition-all animate-in fade-in zoom-in duration-200">
+<div class="flex items-center justify-between p-4 border-b border-slate-700 bg-surface-dark/50">
+<h3 class="text-white font-semibold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_open</span>
+                    Open DICOM Data
+                </h3>
+<button class="text-slate-400 hover:text-white transition-colors rounded-full p-1 hover:bg-white/10">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6">
+<div class="group relative flex flex-col items-center justify-center w-full h-56 rounded-xl border-2 border-dashed border-slate-600 hover:border-primary bg-surface-dark/30 hover:bg-surface-dark transition-all cursor-pointer">
+<div class="flex flex-col items-center justify-center pt-5 pb-6 text-center px-4">
+<div class="mb-4 p-4 rounded-full bg-slate-800 group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary">cloud_upload</span>
+</div>
+<p class="mb-2 text-base text-slate-200 font-medium"><span class="text-primary hover:underline">Click to browse</span> or drag and drop</p>
+<p class="text-xs text-slate-500 max-w-xs mx-auto">Supports DICOM files (.dcm) or folders containing medical image series.</p>
+</div>
+<input accept=".dcm,application/dicom" class="hidden" multiple="" type="file"/>
+</div>
+<div class="mt-6 bg-blue-500/5 border border-blue-500/10 rounded-lg p-3 flex gap-3 items-start">
+<div class="bg-blue-500/10 p-1.5 rounded-md shrink-0">
+<span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+</div>
+<div>
+<p class="text-sm text-blue-100 font-medium">Secure Client-Side Processing</p>
+<p class="text-xs text-blue-200/60 mt-0.5 leading-relaxed">Your data stays on your device. We process images locally in your browser using WebGL and WebAssembly. No PHI (Protected Health Information) is uploaded to any server.</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 p-4 border-t border-slate-700 bg-surface-dark/30">
+<button class="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">Cancel</button>
+<button class="px-5 py-2 bg-primary hover:bg-blue-600 text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center gap-2">
+<span>Select Files</span>
+</button>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-[2px] p-4 animate-in fade-in duration-200">
+<div class="flex h-[640px] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-panel-dark shadow-2xl ring-1 ring-white/10">
+<div class="flex items-center justify-between border-b border-slate-700 bg-[#1a242f] px-6 py-4">
+<h2 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">settings</span>
+                Application Settings
+            </h2>
+<button class="rounded-full p-1 text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 flex-col gap-1 border-r border-slate-700 bg-surface-dark p-3 hidden md:flex">
+<button class="flex w-full items-center gap-3 rounded-lg bg-primary/10 px-4 py-2.5 text-left text-sm font-semibold text-primary ring-1 ring-primary/20">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+                    General
+                </button>
+<button class="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-left text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">monitor</span>
+                    Display &amp; Viewports
+                </button>
+<button class="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-left text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">straighten</span>
+                    Measurements
+                </button>
+<button class="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-left text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit_note</span>
+                    Annotations
+                </button>
+<button class="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-left text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">keyboard</span>
+                    Hotkeys
+                </button>
+<button class="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-left text-sm font-medium text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">dns</span>
+                    Servers
+                </button>
+</aside>
+<div class="flex-1 overflow-y-auto bg-panel-dark p-6 md:p-8">
+<div class="space-y-8 max-w-2xl">
+<div>
+<h3 class="mb-4 text-base font-bold text-white border-b border-slate-700 pb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">tune</span> General Preferences
+                        </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">Application Theme</label>
+<p class="text-xs text-slate-500">Select the application appearance</p>
+</div>
+<div class="flex bg-surface-dark rounded-lg p-1 border border-slate-700">
+<button class="px-3 py-1 rounded bg-slate-700 text-white text-xs font-medium shadow-sm">Dark</button>
+<button class="px-3 py-1 rounded text-slate-400 hover:text-white text-xs font-medium">Light</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">Language</label>
+<p class="text-xs text-slate-500">Display language for UI elements</p>
+</div>
+<select class="bg-surface-dark border border-slate-700 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-40 p-1.5">
+<option>English (US)</option>
+<option>Spanish</option>
+<option>French</option>
+<option>German</option>
+</select>
+</div>
+</div>
+</div>
+<div>
+<h3 class="mb-4 text-base font-bold text-white border-b border-slate-700 pb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">monitor</span> Display &amp; Measurement
+                        </h3>
+<div class="space-y-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-3 bg-surface-dark/30 rounded-lg border border-slate-800">
+<label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Default Window Preset</label>
+<select class="bg-surface-dark border border-slate-700 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+<option>Abdomen (Soft Tissue)</option>
+<option>Lung</option>
+<option>Bone</option>
+<option>Brain</option>
+</select>
+</div>
+<div class="p-3 bg-surface-dark/30 rounded-lg border border-slate-800">
+<label class="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-wide">Measurement Units</label>
+<select class="bg-surface-dark border border-slate-700 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+<option>Millimeters (mm)</option>
+<option>Centimeters (cm)</option>
+<option>Inches (in)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="mb-4 text-base font-bold text-white border-b border-slate-700 pb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">edit_note</span> Annotation Settings
+                        </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">Default Export Format</label>
+<p class="text-xs text-slate-500">Select format for saved annotations (local export)</p>
+</div>
+<select class="bg-surface-dark border border-slate-700 text-white text-sm rounded-lg focus:ring-primary focus:border-primary block w-32 p-1.5">
+<option>JSON</option>
+<option>XML</option>
+<option>CSV</option>
+</select>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">Auto-Save Locally</label>
+<p class="text-xs text-slate-500">Automatically save changes to browser storage</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<div>
+<h3 class="mb-4 text-base font-bold text-white border-b border-slate-700 pb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">science</span> Advanced Features
+                        </h3>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">3D MPR Reconstruction</label>
+<p class="text-xs text-slate-500">Enable multi-planar reformatting tools in viewport</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">High-Quality Interpolation</label>
+<p class="text-xs text-slate-500">Smoother image scaling (CPU intensive)</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-dark transition-colors">
+<div>
+<label class="block text-sm font-medium text-slate-200">GPU Acceleration</label>
+<p class="text-xs text-slate-500">Use WebGL for faster image processing</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-slate-700 bg-[#1a242f] px-6 py-4">
+<button class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Reset to Defaults</button>
+<div class="flex items-center gap-3">
+<button class="rounded-lg px-4 py-2 text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-colors">Cancel</button>
+<button class="rounded-lg bg-primary px-6 py-2 text-sm font-bold text-white hover:bg-blue-600 shadow-lg shadow-blue-900/20 transition-all">Save Changes</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
